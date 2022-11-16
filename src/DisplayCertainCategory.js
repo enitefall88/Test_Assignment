@@ -1,13 +1,17 @@
+
 import React, {useState} from "react"
 
 
-  
 
 
 
-function DisplayCertainCategory(listOfCategories) {
+
+function DisplayCertainCategory(listOfCategories, removeCategory) {
   return <div>
-    <a>{listOfCategories.text}</a>
+    <a>{listOfCategories.text}
+
+    </a>
+
   </div>
 }
 

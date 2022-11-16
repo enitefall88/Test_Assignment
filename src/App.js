@@ -10,15 +10,27 @@ let categories = [
 ]
 
 const listOfCategories = categories.map((element) => {
-  return <li>
+  return <li key={element.id}>
     {element.text}
+         <button type="button" onClick={_ => removeCategory(listOfCategories.text)}
+//у каждой категории кнопка удаление, непонятно через список делать и вообще
+// прямо тут или в DisplayCertainCategory компоненте
+
+                  className="btn btn-secondary ml-2"
+                  style={{lineHeight: 1, padding: "0.125rem .25rem"}}>
+       </button>
   </li>
 })
 
+function removeCategory(text) {
+  return 0
+}
 
 function App() {
+  //тут стейт сделаем для категорий
+  //let [categories, setCategories] = useState(categories)
   return <div>
-      <DisplayCertainCategory text={listOfCategories}></DisplayCertainCategory>
+      <DisplayCertainCategory text={listOfCategories} removeCategory={removeCategory}></DisplayCertainCategory>
       </div>
 }
 
