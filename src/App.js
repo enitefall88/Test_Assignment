@@ -1,24 +1,25 @@
 import React, {useState} from "react"
 import DisplayCertainCategory from "./DisplayCertainCategory"
 
-let listOfCategories = [
-  {selected: false, text: "First"},
-  {selected: false, text: "Second"},
-  {selected: false, text: "Third"},
-  {selected: false, text: "Fourth"},
-  {selected: false, text: "No category"}
+let categories = [
+  {selected: false, text: "First Category" , id: 1},
+  {selected: false, text: "Second Category", id: 2},
+  {selected: false, text: "Third Category", id: 3},
+  {selected: false, text: "Fourth Category", id: 4},
+  {selected: false, text: "No category", id: 5}
 ]
 
-//тут надо как-то через пропсы передать
-function App() {
-  return <div className="p-3">
-    {listOfCategories.map((selected, text) => {
-      return <div>
-      <DisplayCertainCategory text={text}></DisplayCertainCategory>
-      </div>
-    })}
+const listOfCategories = categories.map((element) => {
+  return <li>
+    {element.text}
+  </li>
+})
 
-  </div>
+
+function App() {
+  return <div>
+      <DisplayCertainCategory text={listOfCategories}></DisplayCertainCategory>
+      </div>
 }
 
 export default App
