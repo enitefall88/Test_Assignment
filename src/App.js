@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react"
+import DisplayCertainCategory from "./DisplayCertainCategory"
 
+let listOfCategories = [
+  {selected: false, text: "First"},
+  {selected: false, text: "Second"},
+  {selected: false, text: "Third"},
+  {selected: false, text: "Fourth"},
+  {selected: false, text: "No category"}
+]
+
+//тут надо как-то через пропсы передать
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <div className="p-3">
+    {listOfCategories.map((selected, text) => {
+      return <div>
+      <DisplayCertainCategory text={text}></DisplayCertainCategory>
+      </div>
+    })}
+
+  </div>
 }
 
-export default App;
+export default App
