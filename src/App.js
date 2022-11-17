@@ -16,9 +16,15 @@ let initialCategories = [
 
 function App() {
   function removeCategory(text) {
-  return 0
-}
-  //тут стейт сделаем для категорий, но почему-то cannot access before init.
+  console.log("clicked",text)
+    setCategories(
+     categories.filter(category => {
+      //category.text != text тут надо удалить ту, которая кликнута
+     })
+   )
+  }
+
+
   let [categories, setCategories] = useState(initialCategories)
   return <div>
       <Categories categories={categories} removeCategory={removeCategory}></Categories>
