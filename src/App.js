@@ -15,11 +15,11 @@ let initialCategories = [
 
 
 function App() {
-  function removeCategory(text) {
-  console.log("clicked",text)
+  function removeCategory(id) {
+  console.log("clicked",id)
     setCategories(
      categories.filter(category => {
-      //category.text != text тут надо удалить ту, которая кликнута
+      //category.id != id тут надо удалить ту, которая кликнута
      })
    )
   }
