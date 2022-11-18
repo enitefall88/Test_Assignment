@@ -18,9 +18,9 @@ function App() {
   function removeCategory(id) {
   console.log("clicked",id)
     setCategories(
-     categories.filter(category => {
-      //category.id != id тут надо удалить ту, которая кликнута
-     })
+     categories.filter(category =>
+      category.id != id
+     )
    )
   }
 
