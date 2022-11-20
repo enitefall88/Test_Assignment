@@ -63,7 +63,7 @@ function App() {
         removeCategory={removeCategory}
       ></Categories>
       <Items listOfItems={populatedListOfItems}></Items>
-      <PurchasePrice/>
+      <PurchasePrice listOfItems={populatedListOfItems}/>
     </div>
   );
 }

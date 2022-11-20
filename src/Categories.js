@@ -35,4 +35,4 @@ function CategoryItem({ category, removeCategory }) {
   );
 }
 
-export default Categories;
+export default Categories
