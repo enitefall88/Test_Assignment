@@ -1,4 +1,5 @@
 import React from "react"
+import Item from "./Item";
 
 function Items({ listOfItems }) {
   // Items нужно поместить справа от категорий, флексбокс?
@@ -9,14 +10,6 @@ function Items({ listOfItems }) {
           <Item item={item} key={item.id}/>
         )}
       </ul>
-    </div>
-  );
-}
-
-function Item({ item }) {
-   return (
-    <div>
-      <li>{item.name}</li>
     </div>
   );
 }
