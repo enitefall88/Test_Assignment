@@ -1,17 +1,28 @@
 import React from "react"
-import Item from "./Item";
+
 
 function Items({ listOfItems }) {
   // Items нужно поместить справа от категорий, флексбокс?
-  return (
-    <div>
-      <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
-        {listOfItems.map((item) =>
-          <Item item={item} key={item.id}/>
-        )}
-      </ul>
+
+  //таблицу переделал, но неуверен по структуре
+ return  <div>
+      <table>
+
+          <tr>
+            <th>Name</th>
+            <th>Purchase Price</th>
+            <th>Sale Price</th>
+          </tr>
+        {listOfItems.map((value, key) => {
+          return <tr key={key}>
+            <td>{value.name}</td>
+            <td>{value.purchasePrice}</td>
+            <td>{value.salePrice}</td>
+          </tr>
+        })}
+
+      </table>
     </div>
-  );
-}
+ }
 
 export default Items

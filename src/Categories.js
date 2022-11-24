@@ -24,7 +24,8 @@ function CategoryItem({ category, removeCategory }) {
         {category.text}
         <button
           type="button"
-          onClick={(_) => removeCategory(category.id)}
+
+          onClick={() => removeCategory(category.id)}
           className="btn btn-secondary ml-2"
           style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
         >

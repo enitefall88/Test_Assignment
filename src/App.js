@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Categories from "./Categories"
 import Items from "./Items"
-import PurchasePrice from "./Item"
+
 
 let initialCategories = [
   { selected: false, text: "First Category", id: 1 },
