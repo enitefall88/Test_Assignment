@@ -1,14 +1,15 @@
 import React from "react"
 
-function Categories({ categories, removeCategory }) {
+function Categories({ categories, removeCategory, displaySelectedCategory }) {
   return (
-    <div>
+    <div className="box">
       <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
         {categories.map((category) => (
           <CategoryItem
             key={category.id}
             category={category}
             removeCategory={removeCategory}
+            displaySelectedCategory={displaySelectedCategory}
           />
         ))}
       </ul>
@@ -16,17 +17,18 @@ function Categories({ categories, removeCategory }) {
   );
 }
 
-function CategoryItem({ category, removeCategory }) {
+function CategoryItem({ category, removeCategory, displaySelectedCategory }) {
   // CategoryItem компонент наверное лучше вынести в отдельный компонент?
+
   return (
-    <div>
-      <li>
+    <div className="category">
+      <li onClick={() => {displaySelectedCategory(category.description)}}>
         {category.text}
-        <button
+        <button className="categoryDeleteButton"
+
           type="button"
 
           onClick={() => removeCategory(category.id)}
-          className="btn btn-secondary ml-2"
           style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
         >
           &times;

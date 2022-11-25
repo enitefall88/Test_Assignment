@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Categories from "./Categories"
-import Items from "./Items"
+import ItemsTable from "./ItemsTable"
 
 
 let initialCategories = [
@@ -50,19 +50,25 @@ let populatedListOfItems = populateItems(initialItems);
 
 function App() {
   function removeCategory(id) {
-    console.log("clicked", id);
     setCategories(categories.filter((category) => category.id != id));
   }
 
+  function displaySelectedCategory(description) {
+    console.log("displaySelectedCategory")
+    setCategories(categories.filter((category) => category.description == description
+    ))
+  }
+
   let [categories, setCategories] = useState(initialCategories);
-  //let [listOfItems, setListOfItems] = useState(populatedListOfItems);
+
   return (
-    <div>
+    <div className="box">
       <Categories
         categories={categories}
         removeCategory={removeCategory}
+        displaySelectedCategory={displaySelectedCategory}
       ></Categories>
-      <Items listOfItems={populatedListOfItems}></Items>
+      <ItemsTable listOfItems={populatedListOfItems}></ItemsTable>
       </div>
   );
 }
