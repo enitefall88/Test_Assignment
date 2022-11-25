@@ -5,8 +5,8 @@ function ItemsTable({ listOfItems }) {
 
   //таблицу переделал, но неуверен по структуре
   return (
-    <div className="box">
-      <table>
+
+      <table className="box">
          <tbody>
         <tr>
           <th className="column">Name</th>
@@ -24,7 +24,7 @@ function ItemsTable({ listOfItems }) {
         })}
           </tbody>
       </table>
-    </div>
+
   );
 }
 
