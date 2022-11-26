@@ -12,20 +12,20 @@ let initialCategories = [
 ];
 
 let initialItems = [
-  { name: "Item1", description: "First" },
-  { name: "Item2", description: "Second" },
-  { name: "Item3", description: "Third" },
-  { name: "Item4", description: "Fourth" },
-  { name: "Item5", description: "Fifth" },
-  { name: "Item6", description: "First" },
-  { name: "Item7", description: "Second" },
-  { name: "Item8", description: "Third" },
-  { name: "Item9", description: "Fourth" },
-  { name: "Item10", description: "Fifth" },
-  { name: "Item11", description: "Second" },
-  { name: "Item12", description: "Third" },
-  { name: "Item14", description: "Fourth" },
-  { name: "Item15", description: "Fifth" },
+  { name: "Item1", description: "First Category" },
+  { name: "Item2", description: "Second Category" },
+  { name: "Item3", description: "Third Category" },
+  { name: "Item4", description: "Fourth Category" },
+  { name: "Item5", description: "Fifth Category" },
+  { name: "Item6", description: "First Category" },
+  { name: "Item7", description: "Second Category" },
+  { name: "Item8", description: "Third Category" },
+  { name: "Item9", description: "Fourth Category" },
+  { name: "Item10", description: "Fifth Category" },
+  { name: "Item11", description: "Second Category" },
+  { name: "Item12", description: "Third Category" },
+  { name: "Item14", description: "Fourth Category" },
+  { name: "Item15", description: "Fifth Category" },
 ];
 
 //наполняем содержимым по-колхозному
@@ -53,9 +53,9 @@ function App() {
     setCategories(categories.filter((category) => category.id != id));
   }
 
-  function displaySelectedCategory(description) {
-    console.log("displaySelectedCategory")
-    setCategories(categories.filter((category) => category.description == description
+  function onCategorySelect(description="Fourth Category", text) {
+    console.log(description, text)
+    setCategories(categories.filter((category) => category.text === category.description
     ))
   }
 
@@ -66,7 +66,7 @@ function App() {
       <Categories
         categories={categories}
         removeCategory={removeCategory}
-        displaySelectedCategory={displaySelectedCategory}
+        onCategorySelect={onCategorySelect}
       ></Categories>
       <ItemsTable listOfItems={populatedListOfItems}></ItemsTable>
       </div>
