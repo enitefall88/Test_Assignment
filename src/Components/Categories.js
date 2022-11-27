@@ -7,7 +7,7 @@ function Categories({ categories, removeCategory, onCategorySelect }) {
         {categories.map((category) => (
           <CategoryItem
             key={category.id}
-            description={category.description}
+            id={category.id}
             category={category}
             removeCategory={removeCategory}
             onCategorySelect={onCategorySelect}
@@ -18,12 +18,12 @@ function Categories({ categories, removeCategory, onCategorySelect }) {
   );
 }
 
-function CategoryItem({ category, removeCategory, onCategorySelect, description }) {
+function CategoryItem({ category, removeCategory, onCategorySelect, id }) {
   // CategoryItem компонент наверное лучше вынести в отдельный компонент?
 
   return (
 
-      <li className="category" onClick={() => onCategorySelect(description, category.text)}>
+      <li className="category" onClick={() => onCategorySelect(id)}>
         {category.text}
         <button className="categoryDeleteButton"
 

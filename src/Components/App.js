@@ -8,25 +8,26 @@ let initialCategories = [
   { selected: false, text: "Second Category", id: 2 },
   { selected: false, text: "Third Category", id: 3 },
   { selected: false, text: "Fourth Category", id: 4 },
-  { selected: false, text: "No category", id: 5 },
+  { selected: false, text: "No category", id: 0 },
 ];
 
 let initialItems = [
-  { name: "Item1", description: "First Category" },
-  { name: "Item2", description: "Second Category" },
-  { name: "Item3", description: "Third Category" },
-  { name: "Item4", description: "Fourth Category" },
-  { name: "Item5", description: "Fifth Category" },
-  { name: "Item6", description: "First Category" },
-  { name: "Item7", description: "Second Category" },
-  { name: "Item8", description: "Third Category" },
-  { name: "Item9", description: "Fourth Category" },
-  { name: "Item10", description: "Fifth Category" },
-  { name: "Item11", description: "Second Category" },
-  { name: "Item12", description: "Third Category" },
-  { name: "Item14", description: "Fourth Category" },
-  { name: "Item15", description: "Fifth Category" },
+  { name: "Item1", categoryId: 1 },
+  { name: "Item2", categoryId: 2 },
+  { name: "Item3", categoryId: 3 },
+  { name: "Item4", categoryId: 4 },
+  { name: "Item5", categoryId: 3},
+  { name: "Item6", categoryId: 0 },
+  { name: "Item7", categoryId: 1 },
+  { name: "Item8", categoryId: 2},
+  { name: "Item9", categoryId: 2 },
+  { name: "Item10", categoryId: 3 },
+  { name: "Item11", categoryId: 4 },
+  { name: "Item12", categoryId: 1 },
+  { name: "Item14", categoryId: 5 },
+  { name: "Item15", categoryId: 2 },
 ];
+
 
 //наполняем содержимым по-колхозному
 function populateItems(list) {
@@ -34,6 +35,7 @@ function populateItems(list) {
   let id = 0;
   let salePrice = 200;
   let purchasePrice = 100;
+
   populatedListOfItems.forEach((item) => {
     item.id = id;
     item.salePrice = salePrice;
@@ -52,23 +54,27 @@ function App() {
   function removeCategory(id) {
     setCategories(categories.filter((category) => category.id != id));
   }
+//как-то криво сделал, по клику не обновляется потом, нужно два стейта, верно?
+  function setActiveCategory(categoryId) {
+    console.log(categoryId)
 
-  function onCategorySelect(description="Fourth Category", text) {
-    console.log(description, text)
-    setCategories(categories.filter((category) => category.text === category.description
+    setItems(items.filter((item) => item.categoryId === categoryId
+
     ))
   }
 
-  let [categories, setCategories] = useState(initialCategories);
+
+  let [categories, setCategories] = useState(initialCategories)
+  let [items, setItems] = useState(populatedListOfItems)
 
   return (
     <div className="box">
       <Categories
         categories={categories}
         removeCategory={removeCategory}
-        onCategorySelect={onCategorySelect}
+        onCategorySelect={setActiveCategory}
       ></Categories>
-      <ItemsTable listOfItems={populatedListOfItems}></ItemsTable>
+      <ItemsTable listOfItems={items}></ItemsTable>
       </div>
   );
 }
