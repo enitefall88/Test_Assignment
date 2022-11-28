@@ -49,6 +49,7 @@ function populateItems(list) {
 }
 
 let populatedListOfItems = populateItems(initialItems);
+let selectedCategory = 0
 
 function App() {
   function removeCategory(id) {
@@ -57,10 +58,9 @@ function App() {
 //как-то криво сделал, по клику не обновляется потом, нужно два стейта, верно?
   function setActiveCategory(categoryId) {
     console.log(categoryId)
+    //todo
+    setCategories(categories.map
 
-    setItems(items.filter((item) => item.categoryId === categoryId
-
-    ))
   }
 
 
@@ -74,7 +74,9 @@ function App() {
         removeCategory={removeCategory}
         onCategorySelect={setActiveCategory}
       ></Categories>
-      <ItemsTable listOfItems={items}></ItemsTable>
+      <ItemsTable listOfItems={populatedListOfItems.filter(item =>
+          item.categoryId === selectedCategory
+      )}></ItemsTable>
       </div>
   );
 }
