@@ -53,24 +53,28 @@ let selectedCategory = null
 
 function App() {
   function removeCategory(id) {
-    setCategories(categories.filter((category) => category.id != id));
+    setCategories(categories.filter((category) => category.id != id))
+    console.log("clicked remove")
   }
 
   function setActiveCategory(categoryId) {
-
     //todo
     setCategories(categories.map((category) => {
-
-      //вот тут
-      if(category.id === categoryId) {
-        console.log(category.id, categoryId)
-        category.selected = !category.selected}
-    }))
+          //вот тут
+          if(category.id === categoryId) {
+            console.log(category.id, categoryId)
+            category.selected = !category.selected
+            selectedCategory = category.id
+          }
+          return category // вот этого не хватает
+        }
+    ))
 
   }
 
-
   let [categories, setCategories] = useState(initialCategories)
+
+
   //let [items, setItems] = useState(populatedListOfItems)
 
   return (
@@ -86,5 +90,7 @@ function App() {
       </div>
   );
 }
+
+
 
 export default App

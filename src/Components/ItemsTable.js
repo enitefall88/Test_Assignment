@@ -1,13 +1,9 @@
 import React from "react";
 
 function ItemsTable({ listOfItems }) {
-  // ItemsTable нужно поместить справа от категорий, флексбокс?
-
-  //таблицу переделал, но неуверен по структуре
   return (
-
-      <table className="box">
-         <tbody>
+    <table className="box">
+      <tbody>
         <tr>
           <th className="column">Name</th>
           <th className="column">Purchase Price</th>
@@ -22,9 +18,8 @@ function ItemsTable({ listOfItems }) {
             </tr>
           );
         })}
-          </tbody>
-      </table>
-
+      </tbody>
+    </table>
   );
 }
 
