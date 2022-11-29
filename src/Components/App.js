@@ -49,23 +49,28 @@ function populateItems(list) {
 }
 
 let populatedListOfItems = populateItems(initialItems);
-let selectedCategory = 0
+let selectedCategory = null
 
 function App() {
   function removeCategory(id) {
     setCategories(categories.filter((category) => category.id != id));
   }
-//как-то криво сделал, по клику не обновляется потом, нужно два стейта, верно?
+
   function setActiveCategory(categoryId) {
     console.log(categoryId)
     //todo
-    setCategories(categories.map
+    setCategories(categories.map((category) => {
+      console.log(category)
+      //вот тут
+      if(category.id === categoryId) {
+        category.id = !category.id}
+    }))
 
   }
 
 
   let [categories, setCategories] = useState(initialCategories)
-  let [items, setItems] = useState(populatedListOfItems)
+  //let [items, setItems] = useState(populatedListOfItems)
 
   return (
     <div className="box">
