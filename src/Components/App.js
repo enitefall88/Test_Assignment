@@ -57,13 +57,14 @@ function App() {
   }
 
   function setActiveCategory(categoryId) {
-    console.log(categoryId)
+
     //todo
     setCategories(categories.map((category) => {
-      console.log(category)
+
       //вот тут
       if(category.id === categoryId) {
-        category.id = !category.id}
+        console.log(category.id, categoryId)
+        category.selected = !category.selected}
     }))
 
   }
