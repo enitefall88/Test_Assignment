@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 function Categories({ categories, removeCategory, onCategorySelect }) {
   return (
@@ -22,21 +22,18 @@ function CategoryItem({ category, removeCategory, onCategorySelect, id }) {
   // CategoryItem компонент наверное лучше вынести в отдельный компонент?
 
   return (
-
-      <li className="category" onClick={() => onCategorySelect(id)}>
-        {category.text}
-        <button className="categoryDeleteButton"
-
-          type="button"
-
-          onClick={() => removeCategory(category.id)}
-          style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
-        >
-          &times;
-        </button>
-      </li>
-
+    <li className="category" onClick={() => onCategorySelect(id)}>
+      {category.text}
+      <button
+        className="categoryDeleteButton"
+        type="button"
+        onClick={(e) => removeCategory(category.id, e)}
+        style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
+      >
+        &times;
+      </button>
+    </li>
   );
 }
 
-export default Categories
+export default Categories;

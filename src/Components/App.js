@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import Categories from "./Categories"
-import ItemsTable from "./ItemsTable"
+import React, { useState } from "react";
+import Categories from "./Categories";
+import ItemsTable from "./ItemsTable";
 
-
+//selected пока не нужно
 let initialCategories = [
   { selected: false, text: "First Category", id: 1 },
   { selected: false, text: "Second Category", id: 2 },
@@ -16,10 +16,10 @@ let initialItems = [
   { name: "Item2", categoryId: 2 },
   { name: "Item3", categoryId: 3 },
   { name: "Item4", categoryId: 4 },
-  { name: "Item5", categoryId: 3},
+  { name: "Item5", categoryId: 3 },
   { name: "Item6", categoryId: 0 },
   { name: "Item7", categoryId: 1 },
-  { name: "Item8", categoryId: 2},
+  { name: "Item8", categoryId: 2 },
   { name: "Item9", categoryId: 2 },
   { name: "Item10", categoryId: 3 },
   { name: "Item11", categoryId: 4 },
@@ -29,7 +29,6 @@ let initialItems = [
 ];
 
 
-//наполняем содержимым по-колхозному
 function populateItems(list) {
   let populatedListOfItems = [...list];
   let id = 0;
@@ -49,33 +48,35 @@ function populateItems(list) {
 }
 
 let populatedListOfItems = populateItems(initialItems);
-let selectedCategory = null
+let selectedCategory = null;
 
 function App() {
-  function removeCategory(id) {
-    setCategories(categories.filter((category) => category.id != id))
-    console.log("clicked remove")
+  let [categories, setCategories] = useState(initialCategories);
+
+  function removeCategory(id,e) {
+    setCategories(categories.filter(category =>
+     category.id != id
+    ))
+//here
+    e.stopPropagation()
+
+    console.log("From removeCategories clicked remove",e);
   }
+
+
 
   function setActiveCategory(categoryId) {
-    //todo
-    setCategories(categories.map((category) => {
-          //вот тут
-          if(category.id === categoryId) {
-            console.log(category.id, categoryId)
-            category.selected = !category.selected
-            selectedCategory = category.id
-          }
-          return category // вот этого не хватает
+    setCategories(
+      categories.map((category) => {
+        if (category.id === categoryId) {
+          console.log("from setCategories");
+          selectedCategory = category.id;
         }
-    ))
-
+        return category;
+      })
+    )
   }
 
-  let [categories, setCategories] = useState(initialCategories)
-
-
-  //let [items, setItems] = useState(populatedListOfItems)
 
   return (
     <div className="box">
@@ -84,13 +85,13 @@ function App() {
         removeCategory={removeCategory}
         onCategorySelect={setActiveCategory}
       ></Categories>
-      <ItemsTable listOfItems={populatedListOfItems.filter(item =>
-          item.categoryId === selectedCategory
-      )}></ItemsTable>
-      </div>
-  );
+      <ItemsTable
+        listOfItems={populatedListOfItems.filter(
+          (item) => item.categoryId === selectedCategory
+        )}
+      ></ItemsTable>
+    </div>
+  )
 }
-
-
 
 export default App

@@ -1,17 +1,19 @@
-import React from "react";
+import React from "react"
 
 function ItemsTable({ listOfItems }) {
   return (
     <table className="box">
       <tbody>
         <tr>
+           <th className="column">Id</th>
           <th className="column">Name</th>
           <th className="column">Purchase Price</th>
           <th className="column">Sale Price</th>
         </tr>
         {listOfItems.map((value, key) => {
           return (
-            <tr key={key}>
+              <tr key={key}>
+              <td>{value.id}</td>
               <td>{value.name}</td>
               <td>{value.purchasePrice}</td>
               <td>{value.salePrice}</td>
@@ -23,4 +25,4 @@ function ItemsTable({ listOfItems }) {
   );
 }
 
-export default ItemsTable;
+export default ItemsTable
