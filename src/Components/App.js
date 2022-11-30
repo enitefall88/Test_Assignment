@@ -29,7 +29,6 @@ let initialItems = [
   { name: "Item15", categoryId: 2 },
 ];
 
-
 function populateItems(list) {
   let populatedListOfItems = [...list];
   let id = 0;
@@ -53,19 +52,13 @@ let selectedCategory = null;
 
 function App() {
   let [categories, setCategories] = useState(initialCategories);
-  let [modalActive, setModalActive] = useState(true)
+  let [modalActive, setModalActive] = useState(true);
 
-  function removeCategory(id,e) {
-    setCategories(categories.filter(category =>
-     category.id != id
-    ))
-//here
-    e.stopPropagation()
+  function removeCategory(id) {
+    setCategories(categories.filter((category) => category.id != id));
 
-    console.log("From removeCategories clicked remove",e);
+    console.log("From removeCategories clicked remove");
   }
-
-
 
   function setActiveCategory(categoryId) {
     setCategories(
@@ -76,16 +69,17 @@ function App() {
         }
         return category;
       })
-    )
+    );
   }
-
 
   return (
     <div className="box">
-      <Modal active={modalActive} setActive={setModalActive}/>
-      <button className="open btn" onClick={() => setModalActive(true)}></button>
+      <Modal active={modalActive} setActive={setModalActive} />
+      <button
+        className="open btn"
+        onClick={() => setModalActive(true)}
+      ></button>
       <Categories
-
         categories={categories}
         removeCategory={removeCategory}
         onCategorySelect={setActiveCategory}
@@ -96,7 +90,7 @@ function App() {
         )}
       ></ItemsTable>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -29,7 +29,7 @@ function CategoryItem({ category, removeCategory, onCategorySelect, id }) {
         className="categoryDeleteButton"
         type="button"
 
-        onClick={(e) => removeCategory(category.id, e)}
+        onClick={(e) => { e.stopPropagation(); removeCategory(category.id, e)}}
         style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
       >
         &times;
