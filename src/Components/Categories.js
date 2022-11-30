@@ -11,6 +11,7 @@ function Categories({ categories, removeCategory, onCategorySelect }) {
             category={category}
             removeCategory={removeCategory}
             onCategorySelect={onCategorySelect}
+
           />
         ))}
       </ul>
@@ -27,6 +28,7 @@ function CategoryItem({ category, removeCategory, onCategorySelect, id }) {
       <button
         className="categoryDeleteButton"
         type="button"
+
         onClick={(e) => removeCategory(category.id, e)}
         style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
       >

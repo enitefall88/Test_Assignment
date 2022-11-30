@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Categories from "./Categories";
 import ItemsTable from "./ItemsTable";
+import Modal from "./Modal";
 
 //selected пока не нужно
 let initialCategories = [
@@ -52,6 +53,7 @@ let selectedCategory = null;
 
 function App() {
   let [categories, setCategories] = useState(initialCategories);
+  let [modalActive, setModalActive] = useState(true)
 
   function removeCategory(id,e) {
     setCategories(categories.filter(category =>
@@ -80,7 +82,10 @@ function App() {
 
   return (
     <div className="box">
+      <Modal active={modalActive} setActive={setModalActive}/>
+      <button className="open btn" onClick={() => setModalActive(true)}></button>
       <Categories
+
         categories={categories}
         removeCategory={removeCategory}
         onCategorySelect={setActiveCategory}
