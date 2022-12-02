@@ -76,10 +76,11 @@ function App() {
     <div className="box">
       <Modal active={modalActive} setActive={setModalActive} />
       <div>
-      <button
-        className="open btn"
-        onClick={() => setModalActive(true)}
-      >Here comes Modal</button>
+        {!modalActive ? null : (
+          <button className="open btn" onClick={() => setModalActive(true)}>
+            Here comes Modal
+          </button>
+        )}
       </div>
       <Categories
         categories={categories}
