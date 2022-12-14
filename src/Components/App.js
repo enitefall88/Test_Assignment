@@ -82,6 +82,7 @@ function App() {
       </div>
       {isModalOpen && <Modal setModalOpen={setModalOpen} />}
       <Categories
+        setModalOpen={setModalOpen}
         categories={categories}
         removeCategory={removeCategory}
         onCategorySelect={setActiveCategory}
