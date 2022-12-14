@@ -52,7 +52,7 @@ let selectedCategory = null;
 
 function App() {
   let [categories, setCategories] = useState(initialCategories);
-  let [modalActive, setModalActive] = useState(false);
+  let [openModal, setOpenModal] = useState(false);
 
   function removeCategory(id) {
     setCategories(categories.filter((category) => category.id != id));
@@ -74,12 +74,12 @@ function App() {
 
   return (
     <div className="box">
-      <Modal active={modalActive} setActive={setModalActive} />
       <div>
-         <button className="open btn" onClick={() => setModalActive(true)}>
-            Here comes Modal
-          </button>
+        <button className="open btn" onClick={() => setOpenModal(true)}>
+          Modal
+        </button>
       </div>
+      {openModal && <Modal/>}
       <Categories
         categories={categories}
         removeCategory={removeCategory}
