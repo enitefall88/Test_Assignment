@@ -79,7 +79,7 @@ function App() {
           Modal
         </button>
       </div>
-      {openModal && <Modal/>}
+      {openModal && <Modal closeModal={setOpenModal}/>}
       <Categories
         categories={categories}
         removeCategory={removeCategory}
