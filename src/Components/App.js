@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Categories from "./Categories";
 import ItemsTable from "./ItemsTable";
 import Modal from "./Modal";
@@ -76,10 +77,10 @@ function App() {
     <div className="box">
       <div>
         <button className="open btn" onClick={() => setOpenModal(true)}>
-          Modal
+          Open Modal
         </button>
       </div>
-      {openModal && <Modal closeModal={setOpenModal}/>}
+      {openModal && <Modal closeModal={setOpenModal} />}
       <Categories
         categories={categories}
         removeCategory={removeCategory}
