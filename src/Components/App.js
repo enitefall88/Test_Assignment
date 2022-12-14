@@ -53,7 +53,7 @@ let selectedCategory = null;
 
 function App() {
   let [categories, setCategories] = useState(initialCategories);
-  let [openModal, setOpenModal] = useState(false);
+  let [isModalOpen, setModalOpen] = useState(false);
 
   function removeCategory(id) {
     setCategories(categories.filter((category) => category.id != id));
@@ -76,11 +76,11 @@ function App() {
   return (
     <div className="box">
       <div>
-        <button className="open btn" onClick={() => setOpenModal(true)}>
+        <button className="open btn" onClick={() => setModalOpen(true)}>
           Open Modal
         </button>
       </div>
-      {openModal && <Modal closeModal={setOpenModal} />}
+      {isModalOpen && <Modal setModalOpen={setModalOpen} />}
       <Categories
         categories={categories}
         removeCategory={removeCategory}

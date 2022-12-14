@@ -1,4 +1,4 @@
-.modalBackground {
+.modal-background {
   width: 100vw;
   height: 100vh;
   background-color: rgba(200, 200, 200);
@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.modalContainer {
+.modal-container {
   width: 500px;
   height: 500px;
   border-radius: 12px;
@@ -19,25 +19,25 @@
   padding: 25px;
 }
 
-.modalContainer .title {
+.modal-container .title {
   display: inline-block;
   text-align: center;
   margin-top: 10px;
 }
 
-.titleCloseBtn {
+.title-close-btn {
   display: flex;
   justify-content: flex-end;
 }
 
-.titleCloseBtn button {
+.title-close-btn button {
   background-color: transparent;
   border: none;
   font-size: 25px;
   cursor: pointer;
 }
 
-.modalContainer .body {
+.modal-container .body {
   flex: 50%;
   display: flex;
   justify-content: center;
@@ -46,14 +46,14 @@
   text-align: center;
 }
 
-.modalContainer .footer {
+.modal-container .footer {
   flex: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.modalContainer .footer button {
+.modal-container .footer button {
   width: 150px;
   height: 45px;
   margin: 10px;
