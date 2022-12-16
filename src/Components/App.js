@@ -26,7 +26,7 @@ let initialItems = [
   { name: "Item10", categoryId: 3 },
   { name: "Item11", categoryId: 4 },
   { name: "Item12", categoryId: 1 },
-  { name: "Item14", categoryId: 5 },
+  { name: "Item14", categoryId: 3 },
   { name: "Item15", categoryId: 2 },
 ];
 
@@ -58,20 +58,18 @@ function App() {
   let [items, setItems] = useState(initialItems)
 
  function submitRemoveCategory(id) {
-    setCategories(categories.filter((category) => category.id != id));
+    setCategories(categories.filter((category) => category.id !== id));
     hideModal()
     setId(null)
+    setItems(items)
   }
 
-  function setCategoryToUndefinedHelper() {
-    for (let i = 0; i < items.length; i+=1) {
-    if(items[i].categoryId == id) {
-      items[i].categoryId = 0
-      }
-    }
-  }
+  function setCategoryToUndefinedHelper(item) {
+  if(item.categoryId === id) {
+    return item.categoryId = 0
+  }}
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
-    setItems(items.filter(setCategoryToUndefinedHelper))
+    setItems(items.forEach(item => setCategoryToUndefinedHelper(item)))
     console.log(items)
     submitRemoveCategory(id)
     console.log( categories)

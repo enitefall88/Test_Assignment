@@ -19,7 +19,7 @@ function Categories({ categories, removeCategory, onCategorySelect, showModal })
   );
 }
 
-function CategoryItem({ category, removeCategory, onCategorySelect, id, showModal }) {
+function CategoryItem({ category, onCategorySelect, id, showModal }) {
   // CategoryItem компонент наверное лучше вынести в отдельный компонент?
 
   return (
@@ -32,7 +32,7 @@ function CategoryItem({ category, removeCategory, onCategorySelect, id, showModa
           e.stopPropagation();
           showModal(id)
           console.log(id)
-          //removeCategory(category.id, e);
+
         }}
         style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
       >
