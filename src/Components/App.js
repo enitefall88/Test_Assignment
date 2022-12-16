@@ -55,11 +55,26 @@ function App() {
   let [categories, setCategories] = useState(initialCategories);
   let [isModalOpen, setModalOpen] = useState(false);
   let [id, setId] = useState(null);
+  let [items, setItems] = useState(initialItems)
 
-  function submitRemoveCategory(id) {
+ function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id != id));
     hideModal()
+    setId(null)
+  }
 
+  function setCategoryToUndefinedHelper() {
+    for (let i = 0; i < items.length; i+=1) {
+    if(items[i].categoryId == id) {
+      items[i].categoryId = 0
+      }
+    }
+  }
+  function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
+    setItems(items.filter(setCategoryToUndefinedHelper))
+    console.log(items)
+    submitRemoveCategory(id)
+    console.log( categories)
   }
 
   function showModal(id) {
@@ -85,12 +100,12 @@ function App() {
 
   return (
     <div className="box">
-      {isModalOpen && <Modal showModal={showModal} submitRemoveCategory={submitRemoveCategory}
+      {isModalOpen && <Modal showModal={showModal} submitRemoveCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
       hideModal={hideModal} id={id} />}
       <Categories
         showModal={showModal}
         categories={categories}
-        removeCategory={submitRemoveCategory}
+        removeCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
         onCategorySelect={setActiveCategory}
       ></Categories>
       <ItemsTable
