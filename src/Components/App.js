@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Categories from "./Categories";
 import ItemsTable from "./ItemsTable";
 import Modal from "./Modal";
+import Header from "./Header";
 
 //selected пока не нужно
 let initialCategories = [
@@ -55,29 +56,30 @@ function App() {
   let [categories, setCategories] = useState(initialCategories);
   let [isModalOpen, setModalOpen] = useState(false);
   let [id, setId] = useState(null);
-  let [items, setItems] = useState(initialItems)
+  let [items, setItems] = useState(initialItems);
 
- function submitRemoveCategory(id) {
+  function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
-    hideModal()
-    setId(null)
-    setItems(items)
+    hideModal();
+    setId(null);
+    setItems(items);
   }
 
   function setCategoryToUndefinedHelper(item) {
-  if(item.categoryId === id) {
-    return item.categoryId = 0
-  }}
+    if (item.categoryId === id) {
+      return (item.categoryId = 0);
+    }
+  }
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
-    setItems(items.forEach(item => setCategoryToUndefinedHelper(item)))
-    console.log(items)
-    submitRemoveCategory(id)
-    console.log( categories)
+    setItems(items.forEach((item) => setCategoryToUndefinedHelper(item)));
+    console.log(items);
+    submitRemoveCategory(id);
+    console.log(categories);
   }
 
   function showModal(id) {
-    setModalOpen(true)
-    setId(id)
+    setModalOpen(true);
+    setId(id);
   }
 
   function hideModal() {
@@ -97,20 +99,31 @@ function App() {
   }
 
   return (
-    <div className="box">
-      {isModalOpen && <Modal showModal={showModal} submitRemoveCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
-      hideModal={hideModal} id={id} />}
-      <Categories
-        showModal={showModal}
-        categories={categories}
-        removeCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
-        onCategorySelect={setActiveCategory}
-      ></Categories>
-      <ItemsTable
-        listOfItems={populatedListOfItems.filter(
-          (item) => item.categoryId === selectedCategory
+    <div>
+      <Header/>
+      <div className="box">
+        {isModalOpen && (
+          <Modal
+            showModal={showModal}
+            submitRemoveCategory={
+              submitRemoveCategoryWithMovingItemsToNoCategory
+            }
+            hideModal={hideModal}
+            id={id}
+          />
         )}
-      ></ItemsTable>
+        <Categories
+          showModal={showModal}
+          categories={categories}
+          removeCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
+          onCategorySelect={setActiveCategory}
+        ></Categories>
+        <ItemsTable
+          listOfItems={populatedListOfItems.filter(
+            (item) => item.categoryId === selectedCategory
+          )}
+        ></ItemsTable>
+      </div>
     </div>
   );
 }

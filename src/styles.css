@@ -36,3 +36,10 @@ code {
 }
 
 
+.header {
+   margin-top: 10px;
+  display: flex;
+  align-items: stretch;
+  font-size: 23px;
+  margin-left: 300px;
+}
