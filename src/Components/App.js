@@ -65,11 +65,11 @@ function App() {
   function showModal(id) {
     setModalOpen(true)
     setId(id)
-  };
+  }
 
   function hideModal() {
     setModalOpen(false);
-  };
+  }
 
   function setActiveCategory(categoryId) {
     setCategories(
@@ -85,12 +85,8 @@ function App() {
 
   return (
     <div className="box">
-      <div>
-        <button className="open btn" onClick={() => setModalOpen(true)}>
-          Open Modal
-        </button>
-      </div>
-      {isModalOpen && <Modal showModal={showModal} submitRemoveCategory={submitRemoveCategory} id={id} />}
+      {isModalOpen && <Modal showModal={showModal} submitRemoveCategory={submitRemoveCategory}
+      hideModal={hideModal} id={id} />}
       <Categories
         showModal={showModal}
         categories={categories}
