@@ -1,6 +1,6 @@
 import React from "react";
 
-function Categories({ categories, removeCategory, onCategorySelect, setModalOpen }) {
+function Categories({ categories, removeCategory, onCategorySelect, showModal }) {
   return (
     <div className="box">
       <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
@@ -11,7 +11,7 @@ function Categories({ categories, removeCategory, onCategorySelect, setModalOpen
             category={category}
             removeCategory={removeCategory}
             onCategorySelect={onCategorySelect}
-            setModalOpen={setModalOpen}
+            showModal={showModal}
           />
         ))}
       </ul>
@@ -19,7 +19,7 @@ function Categories({ categories, removeCategory, onCategorySelect, setModalOpen
   );
 }
 
-function CategoryItem({ category, removeCategory, onCategorySelect, id, setModalOpen }) {
+function CategoryItem({ category, removeCategory, onCategorySelect, id, showModal }) {
   // CategoryItem компонент наверное лучше вынести в отдельный компонент?
 
   return (
@@ -30,8 +30,9 @@ function CategoryItem({ category, removeCategory, onCategorySelect, id, setModal
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          setModalOpen(true)
-          removeCategory(category.id, e);
+          showModal(id)
+          console.log(id)
+          //removeCategory(category.id, e);
         }}
         style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
       >

@@ -59,6 +59,11 @@ function App() {
     setCategories(categories.filter((category) => category.id != id));
 
     console.log("From removeCategories clicked remove");
+    setModalOpen(false)
+  }
+
+  function showModal(id) {
+    setModalOpen(true)
   }
 
   function setActiveCategory(categoryId) {
@@ -80,9 +85,9 @@ function App() {
           Open Modal
         </button>
       </div>
-      {isModalOpen && <Modal setModalOpen={setModalOpen} />}
+      {isModalOpen && <Modal showModal={showModal} confirmModal={removeCategory} />}
       <Categories
-        setModalOpen={setModalOpen}
+        showModal={showModal}
         categories={categories}
         removeCategory={removeCategory}
         onCategorySelect={setActiveCategory}
