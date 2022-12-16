@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 import Categories from "./Categories";
 import ItemsTable from "./ItemsTable";
-import Modal from "./Modal";
+import RemoveCategoryModal from "./RemoveCategoryModal";
 import Header from "./Header";
+import AddItemModal from "./AddItemModal";
 
 //selected пока не нужно
 let initialCategories = [
@@ -57,7 +58,7 @@ function App() {
   let [isModalOpen, setModalOpen] = useState(false);
   let [id, setId] = useState(null);
   let [items, setItems] = useState(initialItems);
-
+ let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
     hideModal();
@@ -82,6 +83,11 @@ function App() {
     setId(id);
   }
 
+  function showAddItemModal() {
+    setAddItemModalOpen(true)
+    console.log("from AddItem")
+  }
+
   function hideModal() {
     setModalOpen(false);
   }
@@ -100,10 +106,16 @@ function App() {
 
   return (
     <div>
-      <Header/>
+      <Header showAddItemModal={showAddItemModal}/>
       <div className="box">
+        {isAddItemModalOpen && (
+            <AddItemModal
+            hideModal={hideModal}
+            showAddItemModal={showAddItemModal}
+            />
+        )}
         {isModalOpen && (
-          <Modal
+          <RemoveCategoryModal
             showModal={showModal}
             submitRemoveCategory={
               submitRemoveCategoryWithMovingItemsToNoCategory

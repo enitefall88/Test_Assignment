@@ -1,7 +1,7 @@
 import React from "react";
 import "../Modal.css";
 
-function Modal({setModalOpen, submitRemoveCategory, id, message, hideModal}) {
+function RemoveCategoryModal({setModalOpen, submitRemoveCategory, id, message, hideModal}) {
   return (
     <div className="modal-background" onClick={() => setModalOpen(false)}>
       <div className="modal-container" onClick={e => e.stopPropagation()}>
@@ -19,4 +19,4 @@ function Modal({setModalOpen, submitRemoveCategory, id, message, hideModal}) {
   );
 }
 
-export default Modal;
+export default RemoveCategoryModal;

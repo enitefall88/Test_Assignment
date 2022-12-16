@@ -17,13 +17,17 @@ code {
 }
 
 .box {
+  margin-left: 10px;
   display: flex;
   align-items: stretch;
 
 }
 
 .category {
+  display: flex;
+  justify-content: center;
   width: 200px;
+  margin-bottom: 20px;
 }
 
 .column {
@@ -43,3 +47,8 @@ code {
   font-size: 23px;
   margin-left: 300px;
 }
+
+.table-body {
+  margin-left: 30px;
+ }
+

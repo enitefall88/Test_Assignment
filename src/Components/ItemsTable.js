@@ -3,7 +3,7 @@ import React from "react"
 function ItemsTable({ listOfItems }) {
   return (
     <table className="box">
-      <tbody>
+      <tbody className="table-body">
         <tr>
            <th className="column">Id</th>
           <th className="column">Name</th>
