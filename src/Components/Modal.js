@@ -1,7 +1,7 @@
 import React from "react";
 import "../Modal.css";
 
-function Modal({setModalOpen, confirmModal, id, message}) {
+function Modal({setModalOpen, submitRemoveCategory, id, message}) {
   return (
     <div className="modal-background" onClick={() => setModalOpen(false)}>
       <div className="modal-container" onClick={e => e.stopPropagation()}>
@@ -13,7 +13,7 @@ function Modal({setModalOpen, confirmModal, id, message}) {
           <p>Blah blah</p>
         </div>
         <button onClick={() => setModalOpen(false)} id="cancelBtn">Cancel</button>
-        <button onClick={() => confirmModal(id)}>Confirm</button>
+        <button onClick={() => submitRemoveCategory(id)}>Confirm</button>
       </div>
     </div>
   );

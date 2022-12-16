@@ -54,17 +54,22 @@ let selectedCategory = null;
 function App() {
   let [categories, setCategories] = useState(initialCategories);
   let [isModalOpen, setModalOpen] = useState(false);
+  let [id, setId] = useState(null);
 
-  function removeCategory(id) {
+  function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id != id));
+    hideModal()
 
-    console.log("From removeCategories clicked remove");
-    setModalOpen(false)
   }
 
   function showModal(id) {
     setModalOpen(true)
-  }
+    setId(id)
+  };
+
+  function hideModal() {
+    setModalOpen(false);
+  };
 
   function setActiveCategory(categoryId) {
     setCategories(
@@ -85,11 +90,11 @@ function App() {
           Open Modal
         </button>
       </div>
-      {isModalOpen && <Modal showModal={showModal} confirmModal={removeCategory} />}
+      {isModalOpen && <Modal showModal={showModal} submitRemoveCategory={submitRemoveCategory} id={id} />}
       <Categories
         showModal={showModal}
         categories={categories}
-        removeCategory={removeCategory}
+        removeCategory={submitRemoveCategory}
         onCategorySelect={setActiveCategory}
       ></Categories>
       <ItemsTable
