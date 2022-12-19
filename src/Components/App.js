@@ -64,10 +64,12 @@ function App() {
     hideModal();
     setId(null);
     setItems(items);
+    console.log(items)
   }
 
-  function setCategoryToUndefinedHelper(item) {
+/*  function setCategoryToUndefinedHelper(item) {
     if (item.categoryId === id) {
+      console.log(item)
       return (item.categoryId = 0);
     }
   }
@@ -76,7 +78,18 @@ function App() {
     console.log(items);
     submitRemoveCategory(id);
     console.log(categories);
+  }*/
+
+  function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
+    setItems(items.map(item => {
+      return {
+        ...item,
+        categoryId: item.categoryId === id ? 0 : item.categoryId
+      }
+    }))
+    submitRemoveCategory(id);
   }
+
 
   function showModal(id) {
     setModalOpen(true);
