@@ -1,5 +1,5 @@
 import React from "react";
-import "../Modal.css";
+import "../RemoveCategoryModal.css";
 
 function RemoveCategoryModal({setModalOpen, submitRemoveCategory, id, message, hideModal}) {
   return (

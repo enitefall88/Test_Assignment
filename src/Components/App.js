@@ -55,13 +55,13 @@ let selectedCategory = null;
 
 function App() {
   let [categories, setCategories] = useState(initialCategories);
-  let [isModalOpen, setModalOpen] = useState(false);
+  let [isDeleteCategoryModalOpen, setDeleteCategoryModalOpen] = useState(false);
   let [id, setId] = useState(null);
   let [items, setItems] = useState(initialItems);
  let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
-    hideModal();
+    hideAddItemModal();
     setId(null);
     setItems(items);
     console.log(items)
@@ -91,8 +91,8 @@ function App() {
   }
 
 
-  function showModal(id) {
-    setModalOpen(true);
+  function showCategoryDeleteModal(id) {
+    setDeleteCategoryModalOpen(true);
     setId(id);
   }
 
@@ -101,8 +101,8 @@ function App() {
     console.log("from AddItem")
   }
 
-  function hideModal() {
-    setModalOpen(false);
+  function hideAddItemModal() {
+    setAddItemModalOpen(false);
   }
 
   function setActiveCategory(categoryId) {
@@ -119,26 +119,27 @@ function App() {
 
   return (
     <div>
-      <Header showAddItemModal={showAddItemModal}/>
+      {!isAddItemModalOpen  && // тут наверное как-то изящнее можно скрывать или по-другому скомпоновать
+          <Header showAddItemModal={showAddItemModal}/>}
       <div className="box">
         {isAddItemModalOpen && (
             <AddItemModal
-            hideModal={hideModal}
+            hideAddModal={hideAddItemModal}
             showAddItemModal={showAddItemModal}
             />
         )}
-        {isModalOpen && (
+        {isDeleteCategoryModalOpen && (
           <RemoveCategoryModal
-            showModal={showModal}
+            showModal={showCategoryDeleteModal}
             submitRemoveCategory={
               submitRemoveCategoryWithMovingItemsToNoCategory
             }
-            hideModal={hideModal}
+            hideModal={hideAddItemModal}
             id={id}
           />
         )}
         <Categories
-          showModal={showModal}
+          showModal={showCategoryDeleteModal}
           categories={categories}
           removeCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
           onCategorySelect={setActiveCategory}
