@@ -54,17 +54,17 @@ let populatedListOfItems = populateItems(initialItems);
 let selectedCategory = null;
 
 function App() {
+
   let [categories, setCategories] = useState(initialCategories);
   let [isDeleteCategoryModalOpen, setDeleteCategoryModalOpen] = useState(false);
   let [id, setId] = useState(null);
-  let [items, setItems] = useState(initialItems);
+  let [items, setItems] = useState(populatedListOfItems);
  let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
     hideAddItemModal();
     setId(null);
     setItems(items);
-    console.log(items)
   }
 
 /*  function setCategoryToUndefinedHelper(item) {
@@ -105,6 +105,15 @@ function App() {
     setAddItemModalOpen(false);
   }
 
+  function addItem(name, category, purchasePrice, salePrice) {
+    let item = {name: name, categoryId: +category,  salePrice: +salePrice,
+      purchasePrice: +purchasePrice,
+     }
+    setItems([...items, item])
+    hideAddItemModal()
+    console.log(item)
+    console.log(items)
+  }
   function setActiveCategory(categoryId) {
     setCategories(
       categories.map((category) => {
@@ -126,6 +135,11 @@ function App() {
             <AddItemModal
             hideAddModal={hideAddItemModal}
             showAddItemModal={showAddItemModal}
+            addItem={addItem}
+         /*   selectCategory={selectCategory}
+            changeInputName={ChangeInputName}
+            changeInputPurchasePrice={changeInputPurchasePrice}
+            changeInputSalePrice={changeInputSalePrice}*/
             />
         )}
         {isDeleteCategoryModalOpen && (
@@ -145,7 +159,7 @@ function App() {
           onCategorySelect={setActiveCategory}
         ></Categories>
         <ItemsTable
-          listOfItems={populatedListOfItems.filter(
+          listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory
           )}
         ></ItemsTable>
