@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
-function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
+function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [name, setName] = useState("");
   let [category, setCategory] = useState(null);
   let [purchasePrice, setPurchasePrice] = useState(null);
@@ -16,6 +16,25 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
     };
   }
 
+  function SelectCategory(onChange, categories) {
+
+      return (
+    <label>
+      Select Category
+      <select  onChange={onChange} value={1}>
+        {categories.map((category, index) => (
+          <option key={index} value={category.id}>{category.text}</option>
+        ))}
+      </select>
+    </label>
+  );
+};
+
+   let handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
+
+
   return (
     <div className="modal-background" onClick={() => showAddItemModal()}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -25,7 +44,25 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
           </div>
           <h1>Add an item</h1>
           <form action="" className="input">
-            <input
+            <div>
+              <SelectCategory onChange={handleCategoryChange()}
+              categories={categories}
+
+              />
+            </div>
+         {/*   <div>
+              <label>
+                Select a category
+                <select onChange={(event) => setCategory(event.target.value)} >
+                  {categories.map((category,index) => {
+                    return <option onChange={(event) => setCategory(event.target.value)} key={index} value={category.text}>
+                      {category.id}
+                    </option>
+                  })}
+                </select>
+              </label>
+            </div>*/}
+    {/*        <input
               onChange={(event) => {
                 setCategory(event.target.value);
               }}
@@ -33,6 +70,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
               label="selectCategory"
               type="number"
             />
+*/}
             <input
               onChange={(event) => {
                 setName(event.target.value);

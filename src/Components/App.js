@@ -121,7 +121,7 @@ function App() {
             hideAddModal={hideAddItemModal}
             showAddItemModal={showAddItemModal}
             addItem={addItem}
-
+            categories={categories}
             />
         )}
         {isDeleteCategoryModalOpen && (
