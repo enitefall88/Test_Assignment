@@ -93,10 +93,7 @@ function App() {
     setAddItemModalOpen(false);
   }
 
-  function addItem(name, category, purchasePrice, salePrice) {
-    let item = {name: name, categoryId: +category,  salePrice: +salePrice,
-      purchasePrice: +purchasePrice,
-     }
+  function addItem(item) {
     setItems([...items, item])
     hideAddItemModal()
     console.log(item)

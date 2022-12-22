@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
-function AddItemModal({
-  showAddItemModal,
-  hideAddModal,
-
-    addItem
-}) {
+function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
   let [name, setName] = useState("");
-  let [category, setCategory] = useState(null)
-  let [purchasePrice, setPurchasePrice] = useState(null)
-  let [salePrice, setSalePrice] = useState(null)
+  let [category, setCategory] = useState(null);
+  let [purchasePrice, setPurchasePrice] = useState(null);
+  let [salePrice, setSalePrice] = useState(null);
+
+  let item = {};
+  function createItem(name, categoryId, salePrice, purchasePrice) {
+    item = {
+      name: name,
+      categoryId: +category,
+      salePrice: +salePrice,
+      purchasePrice: +purchasePrice,
+    };
+  }
+
   return (
     <div className="modal-background" onClick={() => showAddItemModal()}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -20,10 +26,12 @@ function AddItemModal({
           <h1>Add an item</h1>
           <form action="" className="input">
             <input
-              onChange={(event) => {setCategory(event.target.value)}}
+              onChange={(event) => {
+                setCategory(event.target.value);
+              }}
               className="input-field"
               label="selectCategory"
-              type="text"
+              type="number"
             />
             <input
               onChange={(event) => {
@@ -39,7 +47,7 @@ function AddItemModal({
               }}
               className="input-field"
               label="inputPurchasePrice"
-              type="text"
+              type="number"
             />
             <input
               onChange={(event) => {
@@ -47,11 +55,17 @@ function AddItemModal({
               }}
               className="input-field"
               label="inputSalePrice"
-              type="text"
+              type="number"
             />
           </form>
         </div>
-        <button className="save-btn" onClick={() => addItem(name,category,purchasePrice,salePrice) }>
+        <button
+          className="save-btn"
+          onClick={() => {
+            createItem(name, category, purchasePrice, salePrice);
+            addItem(item);
+          }}
+        >
           Save
         </button>
       </div>
