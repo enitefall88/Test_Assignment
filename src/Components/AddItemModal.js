@@ -3,10 +3,7 @@ import "../AddItemModal.css";
 function AddItemModal({
   showAddItemModal,
   hideAddModal,
- /* selectCategory,
-  ChangeInputName,
-  changeInputPurchasePrice,
-  changeInputSalePrice,*/
+
     addItem
 }) {
   let [name, setName] = useState("");

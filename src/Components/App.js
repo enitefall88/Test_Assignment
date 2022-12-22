@@ -67,18 +67,6 @@ function App() {
     setItems(items);
   }
 
-/*  function setCategoryToUndefinedHelper(item) {
-    if (item.categoryId === id) {
-      console.log(item)
-      return (item.categoryId = 0);
-    }
-  }
-  function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
-    setItems(items.forEach((item) => setCategoryToUndefinedHelper(item)));
-    console.log(items);
-    submitRemoveCategory(id);
-    console.log(categories);
-  }*/
 
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
     setItems(items.map(item => {
@@ -136,10 +124,7 @@ function App() {
             hideAddModal={hideAddItemModal}
             showAddItemModal={showAddItemModal}
             addItem={addItem}
-         /*   selectCategory={selectCategory}
-            changeInputName={ChangeInputName}
-            changeInputPurchasePrice={changeInputPurchasePrice}
-            changeInputSalePrice={changeInputSalePrice}*/
+
             />
         )}
         {isDeleteCategoryModalOpen && (

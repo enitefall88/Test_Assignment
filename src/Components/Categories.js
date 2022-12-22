@@ -20,11 +20,14 @@ function Categories({ categories, removeCategory, onCategorySelect, showModal })
 }
 
 function CategoryItem({ category, onCategorySelect, id, showModal }) {
-  // CategoryItem компонент наверное лучше вынести в отдельный компонент?
+
 
   return (
     <li className="category" onClick={() => onCategorySelect(id)}>
-      {category.text}
+      <a href="all"  onClick={e => { e.preventDefault(); () => onCategorySelect(id) }}
+
+
+      >{category.text} </a>
       <button
         className="categoryDeleteButton"
         type="button"
