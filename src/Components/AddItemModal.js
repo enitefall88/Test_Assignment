@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
-function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
+function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
   let [name, setName] = useState("");
   let [purchasePrice, setPurchasePrice] = useState(null);
   let [salePrice, setSalePrice] = useState(null);
@@ -29,13 +29,13 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     setValue(event.target.value);
   };
 
-  function SelectCategory({onChange, value, categories}) {
-      return (
+  function SelectCategory({onChange}) {
+    return (
     <label>
       Select Category
       <select  onChange={onChange} value={value}>
 
-        {categories.map((category, index) => (
+        {initialCategories.map((category, index) => (
           <option key={index} value={category.id}>{category.text}</option>
         ))}
       </select>
@@ -55,10 +55,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
           <form action="" className="input">
             <div>
               <SelectCategory onChange={handleCategoryChange}
-             // categories={categories}
-              value={value}
-              categories={initialCategories}
-              />
+               />
             </div>
 
             <input
