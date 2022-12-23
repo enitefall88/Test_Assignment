@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import "../AddItemModal.css";
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [name, setName] = useState("");
-  let [category, setCategory] = useState(null);
   let [purchasePrice, setPurchasePrice] = useState(null);
   let [salePrice, setSalePrice] = useState(null);
-  let [value, setValue] = useState(null)
+  let [value, setValue] = useState(1)
 
   let item = {};
   function createItem(name, categoryId, salePrice, purchasePrice) {
     item = {
       name: name,
-      categoryId: +category,
+      categoryId: +value,
       salePrice: +salePrice,
       purchasePrice: +purchasePrice,
     };
@@ -61,27 +60,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
               categories={initialCategories}
               />
             </div>
-         {/*   <div>
-              <label>
-                Select a category
-                <select onChange={(event) => setCategory(event.target.value)} >
-                  {categories.map((category,index) => {
-                    return <option onChange={(event) => setCategory(event.target.value)} key={index} value={category.text}>
-                      {category.id}
-                    </option>
-                  })}
-                </select>
-              </label>
-            </div>*/}
-    {/*        <input
-              onChange={(event) => {
-                setCategory(event.target.value);
-              }}
-              className="input-field"
-              label="selectCategory"
-              type="number"
-            />
-*/}
+
             <input
               onChange={(event) => {
                 setName(event.target.value);
@@ -111,7 +90,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
         <button
           className="save-btn"
           onClick={() => {
-            createItem(name, category, purchasePrice, salePrice);
+            createItem(name, value, purchasePrice, salePrice);
             addItem(item);
           }}
         >
