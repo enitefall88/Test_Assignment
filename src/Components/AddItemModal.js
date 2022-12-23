@@ -5,6 +5,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [category, setCategory] = useState(null);
   let [purchasePrice, setPurchasePrice] = useState(null);
   let [salePrice, setSalePrice] = useState(null);
+  let [value, setValue] = useState(null)
 
   let item = {};
   function createItem(name, categoryId, salePrice, purchasePrice) {
@@ -16,23 +17,32 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     };
   }
 
-  function SelectCategory(onChange, categories) {
+   let initialCategories = [
+  { text: "First Category", id: 1 },
+  { text: "Second Category", id: 2 },
+  { text: "Third Category", id: 3 },
+  { text: "Fourth Category", id: 4 },
+  { text: "No category", id: 0 }
+];
 
+  let handleCategoryChange = (event) => {
+    console.log(event.target.value)
+    setValue(event.target.value);
+  };
+
+  function SelectCategory({onChange, value, categories}) {
       return (
     <label>
       Select Category
-      <select  onChange={onChange} value={1}>
+      <select  onChange={onChange} value={value}>
+
         {categories.map((category, index) => (
           <option key={index} value={category.id}>{category.text}</option>
         ))}
       </select>
     </label>
   );
-};
-
-   let handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
+}
 
 
   return (
@@ -45,9 +55,10 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
           <h1>Add an item</h1>
           <form action="" className="input">
             <div>
-              <SelectCategory onChange={handleCategoryChange()}
-              categories={categories}
-
+              <SelectCategory onChange={handleCategoryChange}
+             // categories={categories}
+              value={value}
+              categories={initialCategories}
               />
             </div>
          {/*   <div>
