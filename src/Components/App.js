@@ -63,27 +63,23 @@ function App() {
     setCategories(categories.filter((category) => category.id !== id));
     hideCategoryDeleteModal();
     setId(null);
-    setItems(items);
-    console.log(items);
   }
 
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
-    setItems(
-      items.map((item) => {
-        return {
-          ...item,
-          categoryId: item.categoryId === id ? 0 : item.categoryId,
-        };
-      })
-    );
+    let updatedArray = items.map((item) => {
+      return {
+        ...item,
+        categoryId: item.categoryId === id ? 0 : item.categoryId,
+      };
+    });
+    console.log(updatedArray);
+    setItems(updatedArray);
     submitRemoveCategory(id);
-    console.log(items);
   }
 
   function showCategoryDeleteModal(id) {
     setDeleteCategoryModalOpen(true);
     setId(id);
-    console.log("deleteModal");
   }
 
   function hideCategoryDeleteModal() {
@@ -130,7 +126,7 @@ function App() {
         {isDeleteCategoryModalOpen && (
           <RemoveCategoryModal
             showRemoveModal={showCategoryDeleteModal}
-            submitRemoveCategoryWithMovingItemsToNoCategory={
+            submitRemoveCategory={
               submitRemoveCategoryWithMovingItemsToNoCategory
             }
             hideModal={hideCategoryDeleteModal}
