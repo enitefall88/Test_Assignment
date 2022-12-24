@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
-function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
+function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [name, setName] = useState("");
   let [purchasePrice, setPurchasePrice] = useState(null);
   let [salePrice, setSalePrice] = useState(null);
-  let [categoryId, setCategoryId] = useState(1)
+  let [categoryId, setCategoryId] = useState(1);
 
   let item = {};
   function createItem(name, categoryId, salePrice, purchasePrice) {
@@ -17,8 +17,6 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
     };
   }
 
-
-
   return (
     <div className="modal-background" onClick={() => showAddItemModal()}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -29,8 +27,11 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem }) {
           <h1>Add an item</h1>
           <form action="" className="input">
             <div>
-              <SelectCategoryDropdown categoryId={categoryId} setCategoryId={setCategoryId}
-               />
+              <SelectCategoryDropdown
+                categoryId={categoryId}
+                setCategoryId={setCategoryId}
+                categories={categories}
+              />
             </div>
 
             <input
