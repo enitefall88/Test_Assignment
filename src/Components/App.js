@@ -54,39 +54,43 @@ let populatedListOfItems = populateItems(initialItems);
 let selectedCategory = null;
 
 function App() {
-
   let [categories, setCategories] = useState(initialCategories);
   let [isDeleteCategoryModalOpen, setDeleteCategoryModalOpen] = useState(false);
   let [id, setId] = useState(null);
   let [items, setItems] = useState(populatedListOfItems);
- let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
+  let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
-    hideAddItemModal();
+    hideCategoryDeleteModal();
     setId(null);
     setItems(items);
+    console.log(items);
   }
-
 
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
-    setItems(items.map(item => {
-      return {
-        ...item,
-        categoryId: item.categoryId === id ? 0 : item.categoryId
-      }
-    }))
+    setItems(
+      items.map((item) => {
+        return {
+          ...item,
+          categoryId: item.categoryId === id ? 0 : item.categoryId,
+        };
+      })
+    );
     submitRemoveCategory(id);
+    console.log(items);
   }
-
 
   function showCategoryDeleteModal(id) {
     setDeleteCategoryModalOpen(true);
     setId(id);
+    console.log("deleteModal");
   }
 
+  function hideCategoryDeleteModal() {
+    setDeleteCategoryModalOpen(false);
+  }
   function showAddItemModal() {
-    setAddItemModalOpen(true)
-    console.log("from AddItem")
+    setAddItemModalOpen(true);
   }
 
   function hideAddItemModal() {
@@ -94,16 +98,13 @@ function App() {
   }
 
   function addItem(item) {
-    setItems([...items, item])
-    hideAddItemModal()
-    console.log(item)
-    console.log(items)
+    setItems([...items, item]);
+    hideAddItemModal();
   }
   function setActiveCategory(categoryId) {
     setCategories(
       categories.map((category) => {
         if (category.id === categoryId) {
-          console.log("from setCategories");
           selectedCategory = category.id;
         }
         return category;
@@ -113,24 +114,26 @@ function App() {
 
   return (
     <div>
-      {!isAddItemModalOpen  && // тут наверное как-то изящнее можно скрывать или по-другому скомпоновать
-          <Header showAddItemModal={showAddItemModal}/>}
+      {!isAddItemModalOpen &&
+        !isDeleteCategoryModalOpen && ( // тут наверное как-то изящнее можно скрывать или по-другому скомпоновать
+          <Header showAddItemModal={showAddItemModal} />
+        )}
       <div className="box">
         {isAddItemModalOpen && (
-            <AddItemModal
+          <AddItemModal
             hideAddModal={hideAddItemModal}
             showAddItemModal={showAddItemModal}
             addItem={addItem}
             categories={categories}
-            />
+          />
         )}
         {isDeleteCategoryModalOpen && (
           <RemoveCategoryModal
-            showModal={showCategoryDeleteModal}
-            submitRemoveCategory={
+            showRemoveModal={showCategoryDeleteModal}
+            submitRemoveCategoryWithMovingItemsToNoCategory={
               submitRemoveCategoryWithMovingItemsToNoCategory
             }
-            hideModal={hideAddItemModal}
+            hideModal={hideCategoryDeleteModal}
             id={id}
           />
         )}
