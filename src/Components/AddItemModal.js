@@ -17,9 +17,9 @@ function useItemValidation(item) {
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let { inputs, errors, busy, setInputs, setErrors, setBusy } =
     useItemValidation({
-      name: "gym bench",
-      purchasePrice: 0,
-      salePrice: 0,
+      itemName: "",
+      purchasePrice: null,
+      salePrice: null,
     });
 
   async function onChange(event) {
@@ -33,6 +33,8 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       .validateAt(name, { [name]: value }, { abortEarly: false })
       .then((_) => ({ [name]: "" }))
       .catch(convert);
+    //todo
+    //вот тут не так, не то же поле перезаписывается, а новое создается "": 'dfdfd'
     setInputs((inputs) => ({ ...inputs, [name]: value }));
     setErrors({ ...errors, ...inputErrors });
     console.log(inputs);
@@ -79,18 +81,27 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
                 type="text"
               />
             </div>
-            <input
-              onChange={onChange}
-              className="input-field"
-              label="inputPurchasePrice"
-              type="number"
-            />
-            <input
-              onChange={onChange}
-              className="input-field"
-              label="inputSalePrice"
-              type="number"
-            />
+            <div>
+              <label>Purchase Price</label> ({errors.purchasePrice || "*"})
+              <br />
+              <input
+                onChange={onChange}
+                className="input-field"
+                value={inputs.purchasePrice}
+                label="inputPurchasePrice"
+                type="number"
+              />
+            </div>
+            <div>
+              <label>Sell Price</label> ({errors.salePrice || "*"})<br />
+              <input
+                onChange={onChange}
+                className="input-field"
+                value={inputs.salePrice}
+                label="inputSalePrice"
+                type="number"
+              />
+            </div>
           </form>
         </div>
         <button
@@ -125,9 +136,9 @@ let convert = (errors) => {
   }, {});
 };
 
-function delay(ms) {
+/*function delay(ms) {
   return new Promise((resolve, reject) => {
     setTimeout(resolve, ms);
   });
-}
+}*/
 export default AddItemModal;
