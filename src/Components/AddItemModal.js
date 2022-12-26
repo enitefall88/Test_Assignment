@@ -3,7 +3,41 @@ import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
 import * as Y from "yup";
 
+function useItemValidation(item) {
+  let [inputs, setInputs] = useState({
+    name: item.name,
+    purchasePrice: item.purchasePrice,
+    salePrice: item.salePrice,
+  });
+
+  let [errors, setErrors] = useState({});
+  let [busy, setBusy] = useState(false);
+  return { inputs, errors, busy, setInputs, setErrors, setBusy };
+}
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
+  let { inputs, errors, busy, setInputs, setErrors, setBusy } =
+    useItemValidation({
+      name: "gym bench",
+      purchasePrice: 0,
+      salePrice: 0,
+    });
+
+  async function onChange(event) {
+    let {
+      target: { type, name, value, checked },
+    } = event;
+    value = type == "checkbox" ? checked : value;
+    console.log(event);
+
+    let inputErrors = await schema
+      .validateAt(name, { [name]: value }, { abortEarly: false })
+      .then((_) => ({ [name]: "" }))
+      .catch(convert);
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+    setErrors({ ...errors, ...inputErrors });
+    console.log(inputs);
+  }
+
   let [name, setName] = useState("");
   let [purchasePrice, setPurchasePrice] = useState(null);
   let [salePrice, setSalePrice] = useState(null);
@@ -35,27 +69,24 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
                 categories={categories}
               />
             </div>
-
+            <div>
+              <label>Name</label> ({errors.name || "*"})<br />
+              <input
+                onChange={onChange}
+                className="input-field"
+                label="inputName"
+                value={inputs.name}
+                type="text"
+              />
+            </div>
             <input
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
-              className="input-field"
-              label="inputName"
-              type="text"
-            />
-            <input
-              onChange={(event) => {
-                setPurchasePrice(event.target.value);
-              }}
+              onChange={onChange}
               className="input-field"
               label="inputPurchasePrice"
               type="number"
             />
             <input
-              onChange={(event) => {
-                setSalePrice(event.target.value);
-              }}
+              onChange={onChange}
               className="input-field"
               label="inputSalePrice"
               type="number"
@@ -76,4 +107,27 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   );
 }
 
+let schema = Y.object().shape({
+  name: Y.string()
+    .required()
+    .min(3)
+    .max(15)
+    .matches(/^[-a-z0-9]*$/),
+  purchasePrice: Y.number().required().min(0).max(10000),
+  salePrice: Y.number().required().min(0).max(10000),
+});
+let convert = (errors) => {
+  return errors.inner.reduce((z, item) => {
+    let name = (item.path || "").includes(".")
+      ? item.path.split(".")[0]
+      : item.path || "";
+    return z[item.path || ""] ? z : { ...z, [name]: item.message };
+  }, {});
+};
+
+function delay(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+}
 export default AddItemModal;
