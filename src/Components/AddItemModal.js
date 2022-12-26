@@ -5,7 +5,7 @@ import * as Y from "yup";
 
 function useItemValidation(item) {
   let [inputs, setInputs] = useState({
-    name: item.name,
+    inputName: item.inputName,
     purchasePrice: item.purchasePrice,
     salePrice: item.salePrice,
   });
@@ -17,9 +17,9 @@ function useItemValidation(item) {
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let { inputs, errors, busy, setInputs, setErrors, setBusy } =
     useItemValidation({
-      itemName: "",
-      purchasePrice: null,
-      salePrice: null,
+      inputName: "",
+      purchasePrice: 0,
+      salePrice: 0,
     });
 
   async function onChange(event) {
