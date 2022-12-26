@@ -12,7 +12,7 @@ function RemoveCategoryModal({ submitRemoveCategory, id, message, hideModal }) {
           <h1>{message}</h1>
           <p>Do you want to remove the category?</p>
         </div>
-        <button onClick={() => hideModal()} id="cancelBtn">
+        <button onClick={hideModal} id="cancelBtn">
           Cancel
         </button>
         <button onClick={() => submitRemoveCategory(id)}>Confirm</button>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
+import * as Y from "yup";
+
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [name, setName] = useState("");
   let [purchasePrice, setPurchasePrice] = useState(null);

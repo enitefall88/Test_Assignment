@@ -5,13 +5,6 @@ function SelectCategoryDropdown({ categoryId, setCategoryId, categories }) {
     setCategoryId(event.target.value);
   };
 
-  /*  let initialCategories = [
-    { text: "First Category", id: 1 },
-    { text: "Second Category", id: 2 },
-    { text: "Third Category", id: 3 },
-    { text: "Fourth Category", id: 4 },
-    { text: "No category", id: 0 },
-  ];*/
   return (
     <label>
       Select Category
