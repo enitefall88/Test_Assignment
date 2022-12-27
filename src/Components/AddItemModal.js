@@ -77,7 +77,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
                 onChange={onChange}
                 className="input-field"
                 label="inputName"
-                value={inputs.name}
+                value={inputs.inputName}
                 type="text"
               />
             </div>
