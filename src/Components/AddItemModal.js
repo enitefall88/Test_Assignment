@@ -22,12 +22,13 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       salePrice: 0,
     });
 
-  async function onChange(event) {
+  async function onChange(event, fieldName) {
     let {
       target: { type, name, value, checked },
     } = event;
+    console.log(name);
     value = type == "checkbox" ? checked : value;
-    console.log(event);
+    //console.log(event);
 
     let inputErrors = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
