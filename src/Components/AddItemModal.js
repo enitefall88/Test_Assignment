@@ -74,9 +74,8 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
             <div>
               <label>Name</label> ({errors.name || "*"})<br />
               <input
-                onChange={onChange}
+                onChange={(e) => onChange(e, "inputName")}
                 className="input-field"
-                label="inputName"
                 value={inputs.inputName}
                 type="text"
               />
@@ -88,7 +87,6 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
                 onChange={onChange}
                 className="input-field"
                 value={inputs.purchasePrice}
-                label="inputPurchasePrice"
                 type="number"
               />
             </div>
@@ -98,7 +96,6 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
                 onChange={onChange}
                 className="input-field"
                 value={inputs.salePrice}
-                label="inputSalePrice"
                 type="number"
               />
             </div>
@@ -119,7 +116,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
 }
 
 let schema = Y.object().shape({
-  name: Y.string()
+  inputName: Y.string()
     .required()
     .min(3)
     .max(15)
