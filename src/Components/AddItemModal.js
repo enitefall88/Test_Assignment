@@ -22,23 +22,20 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       salePrice: 0,
     });
 
-  async function onChange(event, fieldName) {
+  async function onChange(event) {
     let {
       target: { type, name, value, checked },
     } = event;
     console.log(name);
     value = type == "checkbox" ? checked : value;
-    //console.log(event);
 
     let inputErrors = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
       .then((_) => ({ [name]: "" }))
       .catch(convert);
-    //todo
-    //вот тут не так, не то же поле перезаписывается, а новое создается "": 'dfdfd'
+
     setInputs((inputs) => ({ ...inputs, [name]: value }));
     setErrors({ ...errors, ...inputErrors });
-    console.log(inputs);
   }
 
   let [name, setName] = useState("");
@@ -75,6 +72,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
             <div>
               <label>Name</label> ({errors.name || "*"})<br />
               <input
+                name="inputName"
                 onChange={(e) => onChange(e, "inputName")}
                 className="input-field"
                 value={inputs.inputName}
@@ -85,6 +83,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
               <label>Purchase Price</label> ({errors.purchasePrice || "*"})
               <br />
               <input
+                name="purchasePrice"
                 onChange={onChange}
                 className="input-field"
                 value={inputs.purchasePrice}
@@ -94,6 +93,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
             <div>
               <label>Sell Price</label> ({errors.salePrice || "*"})<br />
               <input
+                name="salePrice"
                 onChange={onChange}
                 className="input-field"
                 value={inputs.salePrice}
