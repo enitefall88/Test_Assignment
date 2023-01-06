@@ -5,6 +5,7 @@ import ItemsTable from "./ItemsTable";
 import RemoveCategoryModal from "./RemoveCategoryModal";
 import Header from "./Header";
 import AddItemModal from "./AddItemModal";
+import AddCategoryModal from "./AddCategoryModal";
 
 //selected пока не нужно
 let initialCategories = [
@@ -59,10 +60,21 @@ function App() {
   let [id, setId] = useState(null);
   let [items, setItems] = useState(populatedListOfItems);
   let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
+  let [isAddCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
   function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
     hideCategoryDeleteModal();
     setId(null);
+  }
+  function addCategory(category) {
+    return { ...categories, category };
+  }
+  function showAddCategoryModalOpen() {
+    setAddItemModalOpen(true);
+  }
+
+  function hideAddCategoryModalOpen() {
+    setAddItemModalOpen(false);
   }
 
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
@@ -114,12 +126,21 @@ function App() {
         !isDeleteCategoryModalOpen && ( // тут наверное как-то изящнее можно скрывать или по-другому скомпоновать
           <Header showAddItemModal={showAddItemModal} />
         )}
+
       <div className="box">
         {isAddItemModalOpen && (
           <AddItemModal
             hideAddModal={hideAddItemModal}
             showAddItemModal={showAddItemModal}
             addItem={addItem}
+            categories={categories}
+          />
+        )}
+        {isAddCategoryModalOpen && (
+          <AddCategoryModal
+            addCategory={addCategory}
+            hideAddCategory={hideAddCategoryModalOpen}
+            showAddCategory={showAddCategoryModalOpen}
             categories={categories}
           />
         )}
