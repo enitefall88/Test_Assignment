@@ -28,7 +28,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     } = event;
     console.log(name);
     value = type == "checkbox" ? checked : value;
-
+    //todo
     let inputErrors = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
       .then((_) => ({ [name]: "" }))
@@ -38,9 +38,6 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     setErrors({ ...errors, ...inputErrors });
   }
 
-  let [name, setName] = useState("");
-  let [purchasePrice, setPurchasePrice] = useState(null);
-  let [salePrice, setSalePrice] = useState(null);
   let [categoryId, setCategoryId] = useState(1);
 
   let item = {};
@@ -51,6 +48,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       salePrice: +salePrice,
       purchasePrice: +purchasePrice,
     };
+    console.log(item);
   }
 
   return (
@@ -70,10 +68,10 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
               />
             </div>
             <div>
-              <label>Name</label> ({errors.name || "*"})<br />
+              <label>Name</label> ({errors.inputName || "*"})<br />
               <input
                 name="inputName"
-                onChange={(e) => onChange(e, "inputName")}
+                onChange={onChange}
                 className="input-field"
                 value={inputs.inputName}
                 type="text"
@@ -105,7 +103,12 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
         <button
           className="save-btn"
           onClick={() => {
-            createItem(name, categoryId, purchasePrice, salePrice);
+            createItem(
+              inputs.inputName,
+              categoryId,
+              inputs.purchasePrice,
+              inputs.salePrice
+            );
             addItem(item);
           }}
         >
