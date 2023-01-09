@@ -40,7 +40,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       ...inputs, //здесь разворачиваем-копируем все что уже есть в объекте
       [name]: value, //вот такая нотация в квадрат. скобках означает, что берем
       // из name="purchasePrice", например значение
-      categoryId: categoryId, //тут всегда null, а нужно текущее значение
+      setCategoryId: categoryId, //тут всегда null, а нужно текущее значение
       //добавить потом ?
     }));
     console.log(inputs);
@@ -128,6 +128,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
 }
 
 let schema = Y.object().shape({
+  categoryId: Y.number.required().min(1).max(100),
   inputName: Y.string()
     .required()
     .min(3)

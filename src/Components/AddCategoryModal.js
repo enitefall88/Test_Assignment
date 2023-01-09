@@ -9,15 +9,24 @@ function AddCategoryModal({
   addCategory,
 }) {
   let [newCategory, setNewCategory] = useState({});
-  //
+  let findTheMaxId = (categories) => {
+    let maxId = 0;
+    categories.forEach((category) => {
+      if (category.id > maxId) {
+        maxId = category.id;
+      }
+    });
+    return maxId;
+  };
+
   function onChange(event) {
     setNewCategory({
       selected: false,
       text: event.target.value,
       // todo тут надо доделать, плюс наверное сделать объект и писать в него только строку с текстом
       //еще неконтрол в контрол превращается,
-      //id наверное рандомно сделать?
-      id: 0,
+      //каждый раз по изменению высчитывается - нехорошо
+      id: findTheMaxId(categories) + 1,
     });
   }
 
