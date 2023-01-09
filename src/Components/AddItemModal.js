@@ -41,16 +41,17 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       [name]: value, //вот такая нотация в квадрат. скобках означает, что берем
       // из name="purchasePrice", например значение
       categoryId: categoryId, //тут всегда null, а нужно текущее значение
+      //добавить потом ?
     }));
     console.log(inputs);
     setErrors({ ...errors, ...inputErrors });
   }
 
   let item = {};
-  function createItem(inputs) {
+  function createItem(inputs, categoryId) {
     item = {
       name: inputs.inputName,
-      categoryId: +inputs.categoryId,
+      categoryId: +categoryId,
       salePrice: +inputs.salePrice,
       purchasePrice: +inputs.purchasePrice,
     };
