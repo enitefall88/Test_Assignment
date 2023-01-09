@@ -67,14 +67,16 @@ function App() {
     setId(null);
   }
   function addCategory(category) {
-    return { ...categories, category };
+    let updatedCategories = [...categories, category];
+    setCategories(updatedCategories);
+    console.log(categories);
   }
   function showAddCategoryModalOpen() {
-    setAddItemModalOpen(true);
+    setAddCategoryModalOpen(true);
   }
 
   function hideAddCategoryModalOpen() {
-    setAddItemModalOpen(false);
+    setAddCategoryModalOpen(false);
   }
 
   function submitRemoveCategoryWithMovingItemsToNoCategory(id) {
@@ -123,8 +125,12 @@ function App() {
   return (
     <div>
       {!isAddItemModalOpen &&
+        !isAddCategoryModalOpen &&
         !isDeleteCategoryModalOpen && ( // тут наверное как-то изящнее можно скрывать или по-другому скомпоновать
-          <Header showAddItemModal={showAddItemModal} />
+          <Header
+            showAddItemModal={showAddItemModal}
+            showAddCategoryModalOpen={showAddCategoryModalOpen}
+          />
         )}
 
       <div className="box">
