@@ -8,11 +8,10 @@ function AddCategoryModal({
   categories,
   addCategory,
 }) {
-  let emptyCategory = { selected: false, text: "", id: 0 };
-  let [createdCategory, setCreatedCategory] = useState(emptyCategory);
+  let [newCategory, setNewCategory] = useState("");
 
   function onChange(event) {
-    setCreatedCategory(event.target.value);
+    setNewCategory(event.target.value);
   }
 
   return (
@@ -24,7 +23,7 @@ function AddCategoryModal({
             name="category"
             onChange={onChange}
             className="input-field"
-            value={createdCategory.text}
+            value={newCategory.text}
             type="text"
           />
         </div>
@@ -32,7 +31,7 @@ function AddCategoryModal({
       <button
         className="save-btn"
         onClick={(event) => {
-          addCategory(createdCategory);
+          addCategory(newCategory);
         }}
       >
         Save

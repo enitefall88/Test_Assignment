@@ -15,12 +15,14 @@ function useItemValidation(item) {
   return { inputs, errors, busy, setInputs, setErrors, setBusy };
 }
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
-  let { inputs, errors, busy, setInputs, setErrors, setBusy } =
-    useItemValidation({
-      inputName: "",
-      purchasePrice: 0,
-      salePrice: 0,
-    });
+  let [categoryId, setCategoryId] = useState(null);
+
+  let { inputs, errors, setInputs, setErrors } = useItemValidation({
+    categoryId: null,
+    inputName: "",
+    purchasePrice: 0,
+    salePrice: 0,
+  });
 
   async function onChange(event) {
     let {
@@ -28,27 +30,31 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     } = event;
     console.log(name);
     value = type == "checkbox" ? checked : value;
-    //todo
+
     let inputErrors = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
       .then((_) => ({ [name]: "" }))
       .catch(convert);
 
-    setInputs((inputs) => ({ ...inputs, [name]: value }));
+    setInputs((inputs) => ({
+      ...inputs, //здесь разворачиваем-копируем все что уже есть в объекте
+      [name]: value, //вот такая нотация в квадрат. скобках означает, что берем
+      // из name="purchasePrice", например значение
+      categoryId: categoryId, //тут всегда null, а нужно текущее значение
+    }));
+    console.log(inputs);
     setErrors({ ...errors, ...inputErrors });
   }
 
-  let [categoryId, setCategoryId] = useState(1);
-
   let item = {};
-  function createItem(name, categoryId, salePrice, purchasePrice) {
+  function createItem(inputs) {
     item = {
-      name: name,
-      categoryId: +categoryId,
-      salePrice: +salePrice,
-      purchasePrice: +purchasePrice,
+      name: inputs.inputName,
+      categoryId: +inputs.categoryId,
+      salePrice: +inputs.salePrice,
+      purchasePrice: +inputs.purchasePrice,
     };
-    console.log(item);
+    console.log("here", item);
   }
 
   return (
@@ -104,10 +110,11 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
           className="save-btn"
           onClick={() => {
             createItem(
-              inputs.inputName,
+              inputs
+              /* inputs.inputName,
               categoryId,
               inputs.purchasePrice,
-              inputs.salePrice
+              inputs.salePrice*/
             );
             addItem(item);
           }}
