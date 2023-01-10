@@ -8,7 +8,11 @@ function AddCategoryModal({
   categories,
   addCategory,
 }) {
-  let [newCategory, setNewCategory] = useState({});
+  let [newCategory, setNewCategory] = useState({
+    selected: false,
+    text: "",
+    id: null,
+  });
   let findTheMaxId = (categories) => {
     let maxId = 0;
     categories.forEach((category) => {
@@ -23,9 +27,7 @@ function AddCategoryModal({
     setNewCategory({
       selected: false,
       text: event.target.value,
-      // todo тут надо доделать, плюс наверное сделать объект и писать в него только строку с текстом
-      //еще неконтрол в контрол превращается,
-      //каждый раз по изменению высчитывается - нехорошо
+      //каждый раз по изменению высчитывается - не есть гуд
       id: findTheMaxId(categories) + 1,
     });
   }

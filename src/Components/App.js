@@ -108,6 +108,7 @@ function App() {
   }
 
   function addItem(item) {
+    console.log(item);
     setItems([...items, item]);
     hideAddItemModal();
   }
