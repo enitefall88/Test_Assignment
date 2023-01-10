@@ -15,7 +15,7 @@ function useItemValidation(item) {
   return { inputs, errors, busy, setInputs, setErrors, setBusy };
 }
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
-  let [categoryId, setCategoryId] = useState(null);
+  let [categoryId, setCategoryId] = useState(0);
 
   let { inputs, errors, setInputs, setErrors } = useItemValidation({
     categoryId: null,
@@ -40,18 +40,17 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       ...inputs, //здесь разворачиваем-копируем все что уже есть в объекте
       [name]: value, //вот такая нотация в квадрат. скобках означает, что берем
       // из name="purchasePrice", например значение
-      setCategoryId: categoryId, //тут всегда null, а нужно текущее значение
-      //добавить потом ?
+      categoryId: categoryId,
     }));
     console.log(inputs);
     setErrors({ ...errors, ...inputErrors });
   }
 
   let item = {};
-  function createItem(inputs, categoryId) {
+  function createItem(inputs) {
     item = {
       name: inputs.inputName,
-      categoryId: +categoryId,
+      categoryId: +inputs.categoryId,
       salePrice: +inputs.salePrice,
       purchasePrice: +inputs.purchasePrice,
     };
@@ -128,7 +127,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
 }
 
 let schema = Y.object().shape({
-  categoryId: Y.number.required().min(1).max(100),
+  categoryId: Y.number().required().min(1).max(100),
   inputName: Y.string()
     .required()
     .min(3)
