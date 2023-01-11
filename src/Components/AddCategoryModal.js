@@ -13,21 +13,18 @@ function AddCategoryModal({
     text: "",
     id: null,
   });
-  let findTheMaxId = (categories) => {
-    let maxId = 0;
-    categories.forEach((category) => {
-      if (category.id > maxId) {
-        maxId = category.id;
-      }
-    });
-    return maxId;
+  let findTheMaxId = () =>
+    categories.reduce((prev, next) => {
+      return Math.max(prev, next.id);
+    }, 0);
+  let findTheMaxIdUsingMap = () => {
+    let idList = categories.map((category) => category.id);
+    return Math.max(...idList);
   };
-
   function onChange(event) {
     setNewCategory({
       selected: false,
       text: event.target.value,
-      //каждый раз по изменению высчитывается - не есть гуд
       id: findTheMaxId(categories) + 1,
     });
   }
