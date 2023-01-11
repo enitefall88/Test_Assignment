@@ -11,8 +11,8 @@ function useItemValidation(item) {
   });
 
   let [errors, setErrors] = useState({});
-  let [busy, setBusy] = useState(false);
-  return { inputs, errors, busy, setInputs, setErrors, setBusy };
+
+  return { inputs, errors, setInputs, setErrors };
 }
 function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [categoryId, setCategoryId] = useState(0);
@@ -28,6 +28,10 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     let {
       target: { type, name, value, checked },
     } = event;
+    /*    let type = event.target.type;
+    let name = event.target.name;
+    let value = event.target.value;
+    let checked = event.target.checked;*/
     console.log(name);
     value = type == "checkbox" ? checked : value;
 
@@ -37,6 +41,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       .catch(convert);
 
     setInputs((inputs) => ({
+      //
       ...inputs, //здесь разворачиваем-копируем все что уже есть в объекте
       [name]: value, //вот такая нотация в квадрат. скобках означает, что берем
       // из name="purchasePrice", например значение
