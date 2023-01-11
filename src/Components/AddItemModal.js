@@ -42,9 +42,8 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
 
     setInputs((inputs) => ({
       //
-      ...inputs, //здесь разворачиваем-копируем все что уже есть в объекте
-      [name]: value, //вот такая нотация в квадрат. скобках означает, что берем
-      // из name="purchasePrice", например значение
+      ...inputs,
+      [name]: value,
       categoryId: categoryId,
     }));
     console.log(inputs);

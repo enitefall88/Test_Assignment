@@ -26,10 +26,7 @@ function AddCategoryModal({
     categories.reduce((prev, next) => {
       return Math.max(prev, next.id);
     }, 0);
-  let findTheMaxIdUsingMap = () => {
-    let idList = categories.map((category) => category.id);
-    return Math.max(...idList);
-  };
+
   /*  function onChange(event) {
 
     setNewCategory({
