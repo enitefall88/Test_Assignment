@@ -41,7 +41,6 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
       .catch(convert);
 
     setInputs((inputs) => ({
-      //
       ...inputs,
       [name]: value,
       categoryId: categoryId,

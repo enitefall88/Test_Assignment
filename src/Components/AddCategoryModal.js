@@ -8,6 +8,7 @@ function useCategoryValidation(category) {
     text: category.value,
     id: category.id,
   });
+
   let [error, setError] = useState({});
   return { input, error };
 }
@@ -17,7 +18,7 @@ function AddCategoryModal({
   categories,
   addCategory,
 }) {
-  let [input, setInput, error, setError] = useCategoryValidation({
+  let { input, setInput, error, setError } = useCategoryValidation({
     selected: false,
     text: "",
     id: null,
@@ -26,7 +27,15 @@ function AddCategoryModal({
     categories.reduce((prev, next) => {
       return Math.max(prev, next.id);
     }, 0);
+  let category = {};
 
+  function createCategory(input) {
+    category = {
+      selected: false,
+      text: input.text,
+      id: findTheMaxId(categories) + 1,
+    };
+  }
   /*  function onChange(event) {
 
     setNewCategory({
@@ -38,23 +47,18 @@ function AddCategoryModal({
   async function onChange(event) {
     let value = event.target.value;
     let name = event.target.name;
-
+    //todo
     let inputError = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
       .then((_) => ({ [name]: "" }))
       .catch(convert);
-
+    //todo
     setInput((input) => ({
       ...input,
-      name: value,
+      [name]: value,
     }));
+    console.log(input);
     setError(...error, inputError);
-
-    setInput({
-      selected: false,
-      text: event.target.value,
-      id: findTheMaxId(categories) + 1,
-    });
   }
 
   return (
@@ -66,7 +70,8 @@ function AddCategoryModal({
         <h1>Add a Category</h1>
         <form action="" className="input">
           <div>
-            <label>Category</label> ({error || "*"})<br />
+            <label>Category</label> {/*({error || "*"})*/}
+            <br />
             <input
               name="category"
               onChange={onChange}
@@ -79,7 +84,9 @@ function AddCategoryModal({
         <button
           className="save-btn"
           onClick={() => {
-            addCategory(input);
+            console.log(input);
+            createCategory(input);
+            addCategory(category);
             hideAddCategory();
           }}
         >
@@ -92,7 +99,7 @@ function AddCategoryModal({
 //todo probably shema and validation functions should be imported as modules from a separate
 //dedicated file
 let schema = Y.object().shape({
-  categoryName: Y.string().required().min(3).max(10),
+  category: Y.string().required().min(3).max(10),
 });
 
 let convert = (errors) => {
