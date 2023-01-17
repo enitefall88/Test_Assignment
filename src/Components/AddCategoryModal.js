@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../RemoveCategoryModal.css";
 import * as Y from "yup";
-//todo working on validation
+
 function useCategoryValidation(category) {
   let [input, setInput] = useState({
     selected: category.selected,
@@ -37,29 +37,22 @@ function AddCategoryModal({
     };
     console.log(category);
   }
-  /*  function onChange(event) {
 
-    setNewCategory({
-      selected: false,
-      text: event.target.value,
-      id: findTheMaxId(categories) + 1,
-    });
-  }*/
   async function onChange(event) {
     let value = event.target.value;
     let name = event.target.name;
-    //todo
+
     let inputError = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
       .then((_) => ({ [name]: "" }))
       .catch(convert);
-    //todo
+
     setInput((input) => ({
       ...input,
       [name]: value,
     }));
-    console.log(input);
-    //setError(...error, inputError);
+    setError({ ...error, inputError });
+    console.log(inputError);
   }
 
   return (
@@ -71,7 +64,7 @@ function AddCategoryModal({
         <h1>Add a Category</h1>
         <form action="" className="input">
           <div>
-            <label>Category</label> {/*({error || "*"})*/}
+            <label>Category</label> ({error.category || "*"})
             <br />
             <input
               name="category"
@@ -104,6 +97,7 @@ let schema = Y.object().shape({
 });
 
 let convert = (errors) => {
+  //console.log(errors);
   return errors.inner.reduce((z, item) => {
     let name = (item.path || "").includes(".")
       ? item.path.split(".")[0]
