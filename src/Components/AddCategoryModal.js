@@ -10,7 +10,7 @@ function useCategoryValidation(category) {
   });
 
   let [error, setError] = useState({});
-  return { input, error };
+  return { input, error, setError, setInput };
 }
 function AddCategoryModal({
   showAddCategory,
@@ -32,9 +32,10 @@ function AddCategoryModal({
   function createCategory(input) {
     category = {
       selected: false,
-      text: input.text,
+      text: input.category,
       id: findTheMaxId(categories) + 1,
     };
+    console.log(category);
   }
   /*  function onChange(event) {
 
@@ -58,7 +59,7 @@ function AddCategoryModal({
       [name]: value,
     }));
     console.log(input);
-    setError(...error, inputError);
+    //setError(...error, inputError);
   }
 
   return (
