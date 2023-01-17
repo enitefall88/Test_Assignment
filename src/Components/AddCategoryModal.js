@@ -64,7 +64,7 @@ function AddCategoryModal({
         <h1>Add a Category</h1>
         <form action="" className="input">
           <div>
-            <label>Category</label> ({error.category || "*"})
+            <label>Category</label> ({input.text || "*"})
             <br />
             <input
               name="category"
