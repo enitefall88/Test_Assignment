@@ -3,6 +3,8 @@ import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
 import * as Y from "yup";
 
+import { convert } from "../validation_funcs";
+
 function useItemValidation(item) {
   let [inputs, setInputs] = useState({
     inputName: item.inputName,
@@ -139,13 +141,5 @@ let schema = Y.object().shape({
   purchasePrice: Y.number().required().min(0).max(10000),
   salePrice: Y.number().required().min(0).max(10000),
 });
-let convert = (errors) => {
-  return errors.inner.reduce((z, item) => {
-    let name = (item.path || "").includes(".")
-      ? item.path.split(".")[0]
-      : item.path || "";
-    return z[item.path || ""] ? z : { ...z, [name]: item.message };
-  }, {});
-};
 
 export default AddItemModal;

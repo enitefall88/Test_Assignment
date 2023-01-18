@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../RemoveCategoryModal.css";
 import * as Y from "yup";
 
+import { convert } from "../validation_funcs";
+
 function useCategoryValidation(category) {
   let [input, setInput] = useState({
     selected: category.selected,
@@ -35,7 +37,6 @@ function AddCategoryModal({
       text: input.category,
       id: findTheMaxId(categories) + 1,
     };
-    console.log(category);
   }
 
   async function onChange(event) {
@@ -51,8 +52,8 @@ function AddCategoryModal({
       ...input,
       [name]: value,
     }));
-    setError({ ...error, inputError });
-    console.log(inputError);
+    setError({ ...inputError });
+    console.log(inputError, error);
   }
 
   return (
@@ -64,7 +65,7 @@ function AddCategoryModal({
         <h1>Add a Category</h1>
         <form action="" className="input">
           <div>
-            <label>Category</label> ({input.text || "*"})
+            <label>Category</label> ({error?.category || "*"})
             <br />
             <input
               name="category"
@@ -96,13 +97,4 @@ let schema = Y.object().shape({
   category: Y.string().required().min(3).max(10),
 });
 
-let convert = (errors) => {
-  //console.log(errors);
-  return errors.inner.reduce((z, item) => {
-    let name = (item.path || "").includes(".")
-      ? item.path.split(".")[0]
-      : item.path || "";
-    return z[item.path || ""] ? z : { ...z, [name]: item.message };
-  }, {});
-};
 export default AddCategoryModal;
