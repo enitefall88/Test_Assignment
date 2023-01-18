@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
 import * as Y from "yup";
-
 import { convert } from "../validation_funcs";
 
 function useItemValidation(item) {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../RemoveCategoryModal.css";
 import * as Y from "yup";
-
 import { convert } from "../validation_funcs";
 
 function useCategoryValidation(category) {
