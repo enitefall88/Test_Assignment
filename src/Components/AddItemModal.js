@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
 import * as Y from "yup";
-import { convert } from "../validation_funcs";
+import { convert } from "../Utils/validation.utils";
 
 function useItemValidation(item) {
   let [inputs, setInputs] = useState({
