@@ -1,12 +1,15 @@
 import React from "react";
+import "../Header.css";
 function Header({ showAddItemModal, showAddCategoryModalOpen }) {
   return (
     <div className="header">
       <div>
-        <button onClick={() => showAddItemModal()}>Add an item</button>
+        <button className="button" onClick={() => showAddItemModal()}>
+          Add an item
+        </button>
       </div>
       <div>
-        <button onClick={() => showAddCategoryModalOpen()}>
+        <button className="button" onClick={() => showAddCategoryModalOpen()}>
           Add a category
         </button>
       </div>
