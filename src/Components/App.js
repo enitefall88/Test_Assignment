@@ -64,8 +64,9 @@ function App() {
   let [isAddCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
   let [isEditItemModalOpen, setEditItemModalOpen] = useState(false);
 
-  function showEditItemModalOpen() {
-    setEditItemModalOpen(false);
+  function showEditItemModal() {
+    setEditItemModalOpen(true);
+    console.log(isEditItemModalOpen);
   }
 
   function hideEditItemModal() {
@@ -137,7 +138,8 @@ function App() {
     <div>
       {!isAddItemModalOpen &&
         !isAddCategoryModalOpen &&
-        !isDeleteCategoryModalOpen && (
+        !isDeleteCategoryModalOpen &&
+        !isEditItemModalOpen && (
           <Header
             showAddItemModal={showAddItemModal}
             showAddCategoryModalOpen={showAddCategoryModalOpen}
@@ -178,10 +180,16 @@ function App() {
           removeCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
           onCategorySelect={setActiveCategory}
         ></Categories>
-        {isShowItemEditModalOpen && <EditItemModal />}
+        {isEditItemModalOpen && (
+          <EditItemModal
+            categories={categories}
+            showEditItemModal={showEditItemModal}
+            hideEditItemModal={hideEditItemModal}
+          />
+        )}
         <ItemsTable
-          showRemoveItemModalOpen={showRemoveItemModalOpen}
-          showEditItemModalOpen={showRemoveItemModalOpen}
+          showEditItemModalOpen={showEditItemModal}
+          hideEditItemModal={hideEditItemModal}
           listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory
           )}

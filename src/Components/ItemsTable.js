@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles.css";
-function ItemsTable({ listOfItems }) {
+function ItemsTable({ listOfItems, showEditItemModalOpen }) {
   return (
     <table className="box">
       <tbody className="table-body">
@@ -21,7 +21,12 @@ function ItemsTable({ listOfItems }) {
                 <button className="remove-button">Remove</button>
               </td>
               <td>
-                <button className="edit-button">Edit</button>
+                <button
+                  className="edit-button"
+                  onClick={() => showEditItemModalOpen()}
+                >
+                  Edit
+                </button>
               </td>
             </tr>
           );
