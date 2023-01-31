@@ -12,6 +12,35 @@ code {
     monospace;
 }
 
+.remove-button {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+   background-color: red;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    display: inline-block ;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.categoryDeleteButton {
+  background-color: dimgrey;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+}
+
+.edit-button{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: aliceblue;
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 8px ;
+
+}
+
 .title {
   margin-top: 10px;
 }

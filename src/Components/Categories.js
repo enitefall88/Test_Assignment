@@ -1,6 +1,11 @@
 import React from "react";
-
-function Categories({ categories, removeCategory, onCategorySelect, showModal }) {
+import "../styles.css";
+function Categories({
+  categories,
+  removeCategory,
+  onCategorySelect,
+  showModal,
+}) {
   return (
     <div className="box">
       <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
@@ -20,22 +25,24 @@ function Categories({ categories, removeCategory, onCategorySelect, showModal })
 }
 
 function CategoryItem({ category, onCategorySelect, id, showModal }) {
-
-
   return (
     <li className="category" onClick={() => onCategorySelect(id)}>
-      <a href="all"  onClick={e => { e.preventDefault(); () => onCategorySelect(id) }}
-
-
-      >{category.text} </a>
+      <a
+        href="all"
+        onClick={(e) => {
+          e.preventDefault();
+          () => onCategorySelect(id);
+        }}
+      >
+        {category.text}{" "}
+      </a>
       <button
         className="categoryDeleteButton"
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          showModal(id)
-          console.log(id)
-
+          showModal(id);
+          console.log(id);
         }}
         style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
       >

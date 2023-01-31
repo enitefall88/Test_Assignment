@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../styles.css";
 function ItemsTable({ listOfItems }) {
   return (
     <table className="box">
@@ -18,10 +18,10 @@ function ItemsTable({ listOfItems }) {
               <td>{value.purchasePrice}</td>
               <td>{value.salePrice}</td>
               <td>
-                <button>Remove</button>
+                <button className="remove-button">Remove</button>
               </td>
               <td>
-                <button>Edit</button>
+                <button className="edit-button">Edit</button>
               </td>
             </tr>
           );
