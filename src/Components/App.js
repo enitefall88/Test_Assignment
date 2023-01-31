@@ -6,6 +6,7 @@ import RemoveCategoryModal from "./RemoveCategoryModal";
 import Header from "./Header";
 import AddItemModal from "./AddItemModal";
 import AddCategoryModal from "./AddCategoryModal";
+import EditItemModal from "./EditItemModal";
 
 //selected пока не нужно
 let initialCategories = [
@@ -61,6 +62,15 @@ function App() {
   let [items, setItems] = useState(populatedListOfItems);
   let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   let [isAddCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
+  let [isEditItemModalOpen, setEditItemModalOpen] = useState(false);
+
+  function showEditItemModalOpen() {
+    setEditItemModalOpen(false);
+  }
+
+  function hideEditItemModal() {
+    setEditItemModalOpen(false);
+  }
   function submitRemoveCategory(id) {
     setCategories(categories.filter((category) => category.id !== id));
     hideCategoryDeleteModal();
@@ -127,7 +137,7 @@ function App() {
     <div>
       {!isAddItemModalOpen &&
         !isAddCategoryModalOpen &&
-        !isDeleteCategoryModalOpen && ( // тут наверное как-то изящнее можно скрывать или по-другому скомпоновать
+        !isDeleteCategoryModalOpen && (
           <Header
             showAddItemModal={showAddItemModal}
             showAddCategoryModalOpen={showAddCategoryModalOpen}
@@ -161,13 +171,17 @@ function App() {
             id={id}
           />
         )}
+
         <Categories
           showModal={showCategoryDeleteModal}
           categories={categories}
           removeCategory={submitRemoveCategoryWithMovingItemsToNoCategory}
           onCategorySelect={setActiveCategory}
         ></Categories>
+        {isShowItemEditModalOpen && <EditItemModal />}
         <ItemsTable
+          showRemoveItemModalOpen={showRemoveItemModalOpen}
+          showEditItemModalOpen={showRemoveItemModalOpen}
           listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory
           )}

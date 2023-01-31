@@ -37,14 +37,14 @@ function CategoryItem({ category, onCategorySelect, id, showModal }) {
         {category.text}{" "}
       </a>
       <button
-        className="categoryDeleteButton"
+        className="category-delete-button"
         type="button"
         onClick={(e) => {
           e.stopPropagation();
           showModal(id);
           console.log(id);
         }}
-        style={{ lineHeight: 1, padding: "0.125rem .25rem" }}
+        style={{ lineHeight: 1 }}
       >
         &times;
       </button>

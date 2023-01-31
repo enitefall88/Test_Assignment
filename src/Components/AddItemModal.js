@@ -29,10 +29,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
     let {
       target: { type, name, value, checked },
     } = event;
-    /*    let type = event.target.type;
-    let name = event.target.name;
-    let value = event.target.value;
-    let checked = event.target.checked;*/
+
     console.log(name);
     value = type == "checkbox" ? checked : value;
 
