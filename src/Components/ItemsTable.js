@@ -5,18 +5,18 @@ function ItemsTable({ listOfItems, showEditItemModalOpen }) {
     <table className="box">
       <tbody className="table-body">
         <tr>
-          <th className="column">Id</th>
-          <th className="column">Name</th>
-          <th className="column">Purchase Price</th>
-          <th className="column">Sale Price</th>
+          <th className="table-entries-titles column">Id</th>
+          <th className="table-entries-titles column">Name</th>
+          <th className="table-entries-titles column">Purchase Price</th>
+          <th className="table-entries-titles column">Sale Price</th>
         </tr>
         {listOfItems.map((value, key) => {
           return (
             <tr key={key}>
-              <td>{value.id}</td>
-              <td>{value.name}</td>
-              <td>{value.purchasePrice}</td>
-              <td>{value.salePrice}</td>
+              <td style={{ padding: "4px" }}>{value.id}</td>
+              <td style={{ padding: "4px" }}>{value.name}</td>
+              <td style={{ padding: "4px" }}>{value.purchasePrice}</td>
+              <td style={{ padding: "4px" }}>{value.salePrice}</td>
               <td>
                 <button className="remove-button">Remove</button>
               </td>
