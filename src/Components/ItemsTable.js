@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles.css";
-function ItemsTable({ listOfItems, showEditItemModalOpen }) {
+function ItemsTable({ listOfItems, showEditItemModalOpen, setCurrentItemId }) {
   return (
     <table className="box">
       <tbody className="table-body">
@@ -23,7 +23,10 @@ function ItemsTable({ listOfItems, showEditItemModalOpen }) {
               <td>
                 <button
                   className="edit-button"
-                  onClick={() => showEditItemModalOpen()}
+                  onClick={(event) => {
+                    showEditItemModalOpen();
+                    setCurrentItemId(event.target.value);
+                  }}
                 >
                   Edit
                 </button>

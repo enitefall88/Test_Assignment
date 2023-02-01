@@ -63,7 +63,8 @@ function App() {
   let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   let [isAddCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
   let [isEditItemModalOpen, setEditItemModalOpen] = useState(false);
-
+  let [currentItemIdForEditModal, setCurrentItemIdForEditModal] =
+    useState(null);
   function showEditItemModal() {
     setEditItemModalOpen(true);
   }
@@ -123,14 +124,19 @@ function App() {
     hideAddItemModal();
   }
   //todo
-  function editItem(itemId, newItem) {
+  function editItem(editedItem, name) {
+    console.log(editedItem, name);
     setItems(
       items.map((item) => {
-        if (item.id === itemId) {
-          return { ...item, ...newItem };
+        if (item.name === name) {
+          return { ...item, ...editedItem };
         }
+        //returns all other items
+        return item;
       })
     );
+    hideEditItemModal();
+    console.log(items);
   }
 
   function setActiveCategory(categoryId) {
@@ -139,9 +145,14 @@ function App() {
         if (category.id === categoryId) {
           selectedCategory = category.id;
         }
+
         return category;
       })
     );
+  }
+
+  function setCurrentItemId(id) {
+    setCurrentItemIdForEditModal(id);
   }
 
   return (
@@ -196,11 +207,13 @@ function App() {
             showEditItemModal={showEditItemModal}
             hideEditItemModal={hideEditItemModal}
             editItem={editItem}
+            currentItemIdForEditModal={currentItemIdForEditModal}
           />
         )}
         <ItemsTable
           showEditItemModalOpen={showEditItemModal}
           hideEditItemModal={hideEditItemModal}
+          setCurrentItemId={setCurrentItemId}
           listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory
           )}

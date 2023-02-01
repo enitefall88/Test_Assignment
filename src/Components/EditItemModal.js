@@ -21,8 +21,11 @@ function EditItemModal({
   hideEditItemModal,
   categories,
   editItem,
+  //need to extract an id of the current item
+  currentItemIdForEditModal,
 }) {
   let [categoryId, setCategoryId] = useState(0);
+  let [currentItemId, setCurrentItemId] = useState(0);
 
   let { inputs, errors, setInputs, setErrors } = useItemValidation({
     inputName: "",
@@ -121,7 +124,8 @@ function EditItemModal({
               inputs.purchasePrice,
               inputs.salePrice*/
             );
-            editItem(item);
+            // need to pass an id from list of items as a second argument
+            editItem(item, currentItemIdForEditModal);
           }}
         >
           Save
