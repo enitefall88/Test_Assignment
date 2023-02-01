@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../AddItemModal.css";
 import * as Y from "yup";
 import { convert } from "../Utils/validation.utils";
-import SelectCategoryDropdownEdit from "./SelectCategoryDropdownEdit";
+import SelectCategoryDropdown from "./SelectCategoryDropdownEdit";
 
 function useItemValidation(item) {
   let [inputs, setInputs] = useState({
@@ -72,7 +72,7 @@ function EditItemModal({
           <h1>Add an item</h1>
           <form action="" className="input">
             <div>
-              <SelectCategoryDropdownEdit
+              <SelectCategoryDropdown
                 categoryId={categoryId}
                 setCategoryId={setCategoryId}
                 categories={categories}
