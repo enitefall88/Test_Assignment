@@ -66,7 +66,6 @@ function App() {
 
   function showEditItemModal() {
     setEditItemModalOpen(true);
-    console.log(isEditItemModalOpen);
   }
 
   function hideEditItemModal() {

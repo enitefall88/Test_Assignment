@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
-import SelectCategoryDropdown from "./SelectCategoryDropdown";
 import * as Y from "yup";
 import { convert } from "../Utils/validation.utils";
+import SelectCategoryDropdownEdit from "./SelectCategoryDropdownEdit";
 
 function useItemValidation(item) {
   let [inputs, setInputs] = useState({
@@ -15,6 +15,7 @@ function useItemValidation(item) {
 
   return { inputs, errors, setInputs, setErrors };
 }
+//todo
 function EditItemModal({
   showEditItemModal,
   hideEditItemModal,
@@ -71,40 +72,40 @@ function EditItemModal({
           <h1>Add an item</h1>
           <form action="" className="input">
             <div>
-              <SelectCategoryDropdown
-                /* categoryId={categoryId}
-                setCategoryId={setCategoryId}*/
+              <SelectCategoryDropdownEdit
+                categoryId={categoryId}
+                setCategoryId={setCategoryId}
                 categories={categories}
               />
             </div>
             <div>
-              <label>Name</label> <br />
+              <label>Name</label>({errors.inputName || "*"}) <br />
               <input
                 name="inputName"
-                //onChange={onChange}
+                onChange={onChange}
                 className="input-field"
-                //value={inputs.inputName}
+                value={inputs.inputName}
                 type="text"
               />
             </div>
             <div>
-              <label>Purchase Price</label>
+              <label>Purchase Price</label> ({errors.purchasePrice || "*"})
               <br />
               <input
                 name="purchasePrice"
-                //   onChange={onChange}
+                onChange={onChange}
                 className="input-field"
-                //value={inputs.purchasePrice}
+                value={inputs.purchasePrice}
                 type="number"
               />
             </div>
             <div>
-              <label>Sell Price</label> <br />
+              <label>Sell Price</label>({errors.salePrice || "*"}) <br />
               <input
                 name="salePrice"
-                // onChange={onChange}
+                onChange={onChange}
                 className="input-field"
-                // value={inputs.salePrice}
+                value={inputs.salePrice}
                 type="number"
               />
             </div>
