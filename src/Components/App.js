@@ -124,11 +124,11 @@ function App() {
     hideAddItemModal();
   }
   //todo
-  function editItem(editedItem, name) {
-    console.log(editedItem, name);
+  function editItem(editedItem, id) {
+    console.log(editedItem, id);
     setItems(
       items.map((item) => {
-        if (item.name === name) {
+        if (item.id === id) {
           return { ...item, ...editedItem };
         }
         //returns all other items
