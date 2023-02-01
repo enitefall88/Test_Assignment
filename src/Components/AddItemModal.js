@@ -19,7 +19,6 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
   let [categoryId, setCategoryId] = useState(0);
 
   let { inputs, errors, setInputs, setErrors } = useItemValidation({
-    categoryId: null,
     inputName: "",
     purchasePrice: 0,
     salePrice: 0,

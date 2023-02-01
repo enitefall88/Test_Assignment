@@ -123,6 +123,17 @@ function App() {
     setItems([...items, item]);
     hideAddItemModal();
   }
+  //todo
+  function editItem(itemId, newItem) {
+    setItems(
+      items.map((item) => {
+        if (item.id === itemId) {
+          return { ...item, ...newItem };
+        }
+      })
+    );
+  }
+
   function setActiveCategory(categoryId) {
     setCategories(
       categories.map((category) => {
@@ -185,6 +196,7 @@ function App() {
             categories={categories}
             showEditItemModal={showEditItemModal}
             hideEditItemModal={hideEditItemModal}
+            editItem={editItem}
           />
         )}
         <ItemsTable

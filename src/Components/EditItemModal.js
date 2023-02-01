@@ -1,12 +1,66 @@
 import React, { useState } from "react";
 import "../AddItemModal.css";
 import SelectCategoryDropdown from "./SelectCategoryDropdown";
+import * as Y from "yup";
+import { convert } from "../Utils/validation.utils";
 
-export default function EditItemModal({
+function useItemValidation(item) {
+  let [inputs, setInputs] = useState({
+    inputName: item.inputName,
+    purchasePrice: item.purchasePrice,
+    salePrice: item.salePrice,
+  });
+
+  let [errors, setErrors] = useState({});
+
+  return { inputs, errors, setInputs, setErrors };
+}
+function EditItemModal({
   showEditItemModal,
   hideEditItemModal,
   categories,
+  editItem,
 }) {
+  let [categoryId, setCategoryId] = useState(0);
+
+  let { inputs, errors, setInputs, setErrors } = useItemValidation({
+    inputName: "",
+    purchasePrice: 0,
+    salePrice: 0,
+  });
+
+  async function onChange(event) {
+    let {
+      target: { type, name, value, checked },
+    } = event;
+
+    console.log(name);
+    value = type == "checkbox" ? checked : value;
+
+    let inputErrors = await schema
+      .validateAt(name, { [name]: value }, { abortEarly: false })
+      .then((_) => ({ [name]: "" }))
+      .catch(convert);
+
+    setInputs((inputs) => ({
+      ...inputs,
+      [name]: value,
+      categoryId: categoryId,
+    }));
+    console.log(inputs);
+    setErrors({ ...errors, ...inputErrors });
+  }
+
+  let item = {};
+  function createItem(inputs) {
+    item = {
+      name: inputs.inputName,
+      categoryId: +inputs.categoryId,
+      salePrice: +inputs.salePrice,
+      purchasePrice: +inputs.purchasePrice,
+    };
+    console.log("here", item);
+  }
   return (
     <div className="modal-background" onClick={() => showEditItemModal()}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -66,7 +120,7 @@ export default function EditItemModal({
               inputs.purchasePrice,
               inputs.salePrice*/
             );
-            addItem(item);
+            editItem(item);
           }}
         >
           Save
@@ -75,3 +129,16 @@ export default function EditItemModal({
     </div>
   );
 }
+
+let schema = Y.object().shape({
+  categoryId: Y.number().required().min(1).max(100),
+  inputName: Y.string()
+    .required()
+    .min(3)
+    .max(15)
+    .matches(/^[-a-z0-9]*$/),
+  purchasePrice: Y.number().required().min(0).max(10000),
+  salePrice: Y.number().required().min(0).max(10000),
+});
+
+export default EditItemModal;
