@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../RemoveCategoryModal.css";
+import "../styles.css";
 import * as Y from "yup";
 import { convert } from "../Utils/validation.utils";
 
@@ -44,7 +45,7 @@ function AddCategoryModal({
 
     let inputError = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
-      .then((_) => ({ [name]: "" }))
+      .then(() => ({ [name]: "" }))
       .catch(convert);
 
     setInput((input) => ({
@@ -75,8 +76,9 @@ function AddCategoryModal({
             />
           </div>
         </form>
+        <br />
         <button
-          className="save-btn"
+          className="save-btn button"
           onClick={() => {
             console.log(input);
             createCategory(input);
@@ -90,8 +92,7 @@ function AddCategoryModal({
     </div>
   );
 }
-//todo probably shema and validation functions should be imported as modules from a separate
-//dedicated file
+
 let schema = Y.object().shape({
   category: Y.string().required().min(3).max(10),
 });

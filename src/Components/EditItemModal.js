@@ -71,7 +71,7 @@ function EditItemModal({
           <div className="title-close-btn">
             <button onClick={() => hideEditItemModal()}>X</button>
           </div>
-          <h1>Add an item</h1>
+          <h1>Edit an item</h1>
           <form action="" className="input">
             <div>
               <SelectCategoryDropdown
@@ -114,16 +114,10 @@ function EditItemModal({
           </form>
         </div>
         <button
-          className="save-btn"
+          className="button"
           onClick={() => {
-            createItem(
-              inputs
-              /* inputs.inputName,
-              categoryId,
-              inputs.purchasePrice,
-              inputs.salePrice*/
-            );
-            // need to pass an id from list of items as a second argument
+            createItem(inputs);
+
             editItem(item, currentItemIdForEditModal);
             console.log(item, currentItemIdForEditModal);
           }}

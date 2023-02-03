@@ -5,12 +5,12 @@ function Header({ showAddItemModal, showAddCategoryModalOpen }) {
     <div className="header">
       <div>
         <button className="button" onClick={() => showAddItemModal()}>
-          Add an item
+          Add an Item
         </button>
       </div>
       <div>
         <button className="button" onClick={() => showAddCategoryModalOpen()}>
-          Add a category
+          Add a Category
         </button>
       </div>
     </div>

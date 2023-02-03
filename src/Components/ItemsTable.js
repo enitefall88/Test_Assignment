@@ -36,7 +36,7 @@ function ItemsTable({
               </td>
               <td>
                 <button
-                  key={value.id.toString()}
+                  key={value.id}
                   className="edit-button"
                   onClick={() => {
                     showEditItemModalOpen();

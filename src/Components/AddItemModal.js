@@ -34,7 +34,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
 
     let inputErrors = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
-      .then((_) => ({ [name]: "" }))
+      .then(() => ({ [name]: "" }))
       .catch(convert);
 
     setInputs((inputs) => ({
@@ -64,7 +64,7 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
           <div className="title-close-btn">
             <button onClick={() => hideAddModal()}>X</button>
           </div>
-          <h1>Add an item</h1>
+          <h1>Add an Item</h1>
           <form action="" className="input">
             <div>
               <SelectCategoryDropdown
@@ -106,16 +106,12 @@ function AddItemModal({ showAddItemModal, hideAddModal, addItem, categories }) {
             </div>
           </form>
         </div>
+        <br />
+        <br />
         <button
-          className="save-btn"
+          className="save-btn button"
           onClick={() => {
-            createItem(
-              inputs
-              /* inputs.inputName,
-              categoryId,
-              inputs.purchasePrice,
-              inputs.salePrice*/
-            );
+            createItem(inputs);
             addItem(item);
           }}
         >

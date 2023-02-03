@@ -93,3 +93,14 @@ code {
   margin-left: 30px;
  }
 
+.button {
+    background-color: green;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    display: inline-block ;
+    margin: 4px 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
