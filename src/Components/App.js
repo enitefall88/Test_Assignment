@@ -158,7 +158,7 @@ function App() {
     setPassItemForEditing(
       items.map((item) => {
         console.log(item, currentItemIdForEditModal);
-        if (currentItemIdForEditModal === item.id) {
+        if (+currentItemIdForEditModal === item.id) {
           return item;
         }
       })
