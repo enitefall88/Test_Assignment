@@ -71,7 +71,7 @@ function EditItemModal({
           <div className="title-close-btn">
             <button onClick={() => hideEditItemModal()}>X</button>
           </div>
-          <h1>Edit an item</h1>
+          <h1>Edit an Item</h1>
           <form action="" className="input">
             <div>
               <SelectCategoryDropdown
@@ -113,6 +113,7 @@ function EditItemModal({
             </div>
           </form>
         </div>
+        <br />
         <button
           className="button"
           onClick={() => {
