@@ -21,16 +21,15 @@ function EditItemModal({
   hideEditItemModal,
   categories,
   editItem,
-  //need to extract an id of the current item
+  itemForEditing,
   currentItemIdForEditModal,
 }) {
   let [categoryId, setCategoryId] = useState(0);
-  let [currentItemId, setCurrentItemId] = useState(0);
 
   let { inputs, errors, setInputs, setErrors } = useItemValidation({
-    inputName: "",
-    purchasePrice: 0,
-    salePrice: 0,
+    inputName: itemForEditing.name,
+    purchasePrice: itemForEditing.purchasePrice,
+    salePrice: itemForEditing.salePrice,
   });
 
   async function onChange(event) {
@@ -43,7 +42,7 @@ function EditItemModal({
 
     let inputErrors = await schema
       .validateAt(name, { [name]: value }, { abortEarly: false })
-      .then((_) => ({ [name]: "" }))
+      .then(() => ({ [name]: "" }))
       .catch(convert);
 
     setInputs((inputs) => ({

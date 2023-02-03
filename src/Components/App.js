@@ -7,9 +7,7 @@ import Header from "./Header";
 import AddItemModal from "./AddItemModal";
 import AddCategoryModal from "./AddCategoryModal";
 import EditItemModal from "./EditItemModal";
-import { createPortal } from "react-dom";
 
-//selected пока не нужно
 let initialCategories = [
   { selected: false, text: "First Category", id: 1 },
   { selected: false, text: "Second Category", id: 2 },
@@ -212,6 +210,7 @@ function App() {
             hideEditItemModal={hideEditItemModal}
             editItem={editItem}
             currentItemIdForEditModal={currentItemIdForEditModal}
+            itemForEditing={itemForEditing}
           />
         )}
         <ItemsTable
@@ -219,7 +218,6 @@ function App() {
           hideEditItemModal={hideEditItemModal}
           //setCurrentItemId={setCurrentItemId}
           findAndSetCurrentItemForEditing={findAndSetCurrentItemForEditing}
-          itemForEditing={itemForEditing}
           listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory
           )}

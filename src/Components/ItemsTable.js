@@ -3,7 +3,6 @@ import "../styles.css";
 function ItemsTable({
   listOfItems,
   showEditItemModalOpen,
-  setCurrentItemId,
   findAndSetCurrentItemForEditing,
 }) {
   return (
@@ -31,10 +30,8 @@ function ItemsTable({
                 <button
                   key={value.id.toString()}
                   className="edit-button"
-                  onClick={(event) => {
+                  onClick={() => {
                     showEditItemModalOpen();
-                    console.log(value);
-
                     findAndSetCurrentItemForEditing(value);
                   }}
                 >
