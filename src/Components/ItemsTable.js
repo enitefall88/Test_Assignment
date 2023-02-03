@@ -1,6 +1,13 @@
 import React from "react";
 import "../styles.css";
-function ItemsTable({ listOfItems, showEditItemModalOpen, setCurrentItemId }) {
+function ItemsTable({
+  listOfItems,
+  showEditItemModalOpen,
+  setCurrentItemId,
+  items,
+  itemForEditing,
+  findAndSetCurrentItemForEditing,
+}) {
   return (
     <table className="box">
       <tbody className="table-body">
@@ -32,6 +39,7 @@ function ItemsTable({ listOfItems, showEditItemModalOpen, setCurrentItemId }) {
                     //setCurrentItemId(event.currentTarget.key);
                     //почему так не работает?
                     setCurrentItemId(value.id);
+                    findAndSetCurrentItemForEditing();
                   }}
                 >
                   Edit

@@ -7,6 +7,7 @@ import Header from "./Header";
 import AddItemModal from "./AddItemModal";
 import AddCategoryModal from "./AddCategoryModal";
 import EditItemModal from "./EditItemModal";
+import { createPortal } from "react-dom";
 
 //selected пока не нужно
 let initialCategories = [
@@ -63,8 +64,8 @@ function App() {
   let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   let [isAddCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
   let [isEditItemModalOpen, setEditItemModalOpen] = useState(false);
-  let [currentItemIdForEditModal, setCurrentItemIdForEditModal] =
-    useState(null);
+  let [currentItemIdForEditModal, setCurrentItemIdForEditModal] = useState("");
+  let [itemForEditing, setPassItemForEditing] = useState({});
   function showEditItemModal() {
     setEditItemModalOpen(true);
   }
@@ -125,7 +126,6 @@ function App() {
   }
   //todo
   function editItem(editedItem, id) {
-    console.log(editedItem, id);
     setItems(
       items.map((item) => {
         if (item.id === id) {
@@ -136,7 +136,6 @@ function App() {
       })
     );
     hideEditItemModal();
-    console.log(items);
   }
 
   function setActiveCategory(categoryId) {
@@ -153,6 +152,18 @@ function App() {
 
   function setCurrentItemId(id) {
     setCurrentItemIdForEditModal(id);
+  }
+  //todo
+  function findAndSetCurrentItemForEditing() {
+    setPassItemForEditing(
+      items.map((item) => {
+        console.log(item, currentItemIdForEditModal);
+        if (currentItemIdForEditModal === item.id) {
+          return item;
+        }
+      })
+    );
+    console.log(itemForEditing);
   }
 
   return (
@@ -214,6 +225,8 @@ function App() {
           showEditItemModalOpen={showEditItemModal}
           hideEditItemModal={hideEditItemModal}
           setCurrentItemId={setCurrentItemId}
+          findAndSetCurrentItemForEditing={findAndSetCurrentItemForEditing}
+          itemForEditing={itemForEditing}
           listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory
           )}
