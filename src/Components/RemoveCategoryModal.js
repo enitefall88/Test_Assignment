@@ -1,7 +1,7 @@
 import React from "react";
 import "../RemoveCategoryModal.css";
 
-function RemoveCategoryModal({ submitRemoveCategory, id, message, hideModal }) {
+function RemoveCategoryModal({ submitRemoveEntry, id, message, hideModal }) {
   return (
     <div className="modal-background" onClick={() => hideModal()}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -9,13 +9,13 @@ function RemoveCategoryModal({ submitRemoveCategory, id, message, hideModal }) {
           <div className="title-close-btn">
             <button onClick={() => hideModal()}>X</button>
           </div>
-          <h1>{message}</h1>
-          <p>Do you want to remove the category?</p>
+          <h1> </h1>
+          <p>{message}</p>
         </div>
         <button onClick={hideModal} id="cancelBtn">
           Cancel
         </button>
-        <button onClick={() => submitRemoveCategory(id)}>Confirm</button>
+        <button onClick={() => submitRemoveEntry(id)}>Confirm</button>
       </div>
     </div>
   );

@@ -62,8 +62,28 @@ function App() {
   let [isAddItemModalOpen, setAddItemModalOpen] = useState(false);
   let [isAddCategoryModalOpen, setAddCategoryModalOpen] = useState(false);
   let [isEditItemModalOpen, setEditItemModalOpen] = useState(false);
-  let [currentItemIdForEditModal, setCurrentItemIdForEditModal] = useState("");
-  let [itemForEditing, setPassItemForEditing] = useState({});
+  let [
+    currentItemIdForEditAndDeleteModal,
+    setCurrentItemIdForEditAndDeleteModal,
+  ] = useState("");
+  let [itemForEditingAndDeleting, setPassItemForEditingAndDeleting] = useState(
+    {}
+  );
+  let [isDeleteItemModalOpen, setDeleteItemModalOpen] = useState(false);
+
+  function showDeleteItemModal() {
+    setDeleteItemModalOpen(true);
+  }
+
+  function hideDeleteItemModal() {
+    setDeleteItemModalOpen(false);
+  }
+
+  function submitRemoveItem() {
+    console.log(itemForEditingAndDeleting.id);
+    setItems(items.filter((item) => itemForEditingAndDeleting.id !== item.id));
+    hideDeleteItemModal();
+  }
   function showEditItemModal() {
     setEditItemModalOpen(true);
   }
@@ -153,8 +173,8 @@ function App() {
   }*/
   //todo
   function findAndSetCurrentItemForEditing(value) {
-    setCurrentItemIdForEditModal(value.id);
-    setPassItemForEditing(value);
+    setCurrentItemIdForEditAndDeleteModal(value.id);
+    setPassItemForEditingAndDeleting(value);
   }
 
   return (
@@ -162,7 +182,8 @@ function App() {
       {!isAddItemModalOpen &&
         !isAddCategoryModalOpen &&
         !isDeleteCategoryModalOpen &&
-        !isEditItemModalOpen && (
+        !isEditItemModalOpen &&
+        !isDeleteItemModalOpen && (
           <Header
             showAddItemModal={showAddItemModal}
             showAddCategoryModalOpen={showAddCategoryModalOpen}
@@ -189,14 +210,12 @@ function App() {
         {isDeleteCategoryModalOpen && (
           <RemoveCategoryModal
             showRemoveModal={showCategoryDeleteModal}
-            submitRemoveCategory={
-              submitRemoveCategoryWithMovingItemsToNoCategory
-            }
+            submitRemoveEntry={submitRemoveCategoryWithMovingItemsToNoCategory}
             hideModal={hideCategoryDeleteModal}
             id={id}
+            message={"Do you want to remove the category?"}
           />
         )}
-
         <Categories
           showModal={showCategoryDeleteModal}
           categories={categories}
@@ -209,14 +228,24 @@ function App() {
             showEditItemModal={showEditItemModal}
             hideEditItemModal={hideEditItemModal}
             editItem={editItem}
-            currentItemIdForEditModal={currentItemIdForEditModal}
-            itemForEditing={itemForEditing}
+            currentItemIdForEditModal={currentItemIdForEditAndDeleteModal}
+            itemForEditing={itemForEditingAndDeleting}
           />
         )}
+        {isDeleteItemModalOpen && (
+          <RemoveCategoryModal
+            hideModal={hideDeleteItemModal}
+            submitRemoveEntry={submitRemoveItem}
+            id={currentItemIdForEditAndDeleteModal}
+            //todo item should be passed in
+            message={"Do you want to delete item ?"}
+          />
+        )}
+        )
         <ItemsTable
           showEditItemModalOpen={showEditItemModal}
           hideEditItemModal={hideEditItemModal}
-          //setCurrentItemId={setCurrentItemId}
+          showDeleteItemModal={showDeleteItemModal}
           findAndSetCurrentItemForEditing={findAndSetCurrentItemForEditing}
           listOfItems={items.filter(
             (item) => item.categoryId === selectedCategory

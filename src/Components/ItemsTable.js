@@ -4,6 +4,7 @@ function ItemsTable({
   listOfItems,
   showEditItemModalOpen,
   findAndSetCurrentItemForEditing,
+  showDeleteItemModal,
 }) {
   return (
     <table className="box">
@@ -22,7 +23,14 @@ function ItemsTable({
               <td style={{ padding: "4px" }}>{value.purchasePrice}</td>
               <td style={{ padding: "4px" }}>{value.salePrice}</td>
               <td>
-                <button key={value.id} className="remove-button">
+                <button
+                  key={value.id}
+                  className="remove-button"
+                  onClick={() => {
+                    showDeleteItemModal();
+                    findAndSetCurrentItemForEditing(value);
+                  }}
+                >
                   Remove
                 </button>
               </td>
