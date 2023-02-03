@@ -23,7 +23,7 @@ function ItemsTable({
               <td style={{ padding: "4px" }}>{value.purchasePrice}</td>
               <td style={{ padding: "4px" }}>{value.salePrice}</td>
               <td>
-                <button key={value.id.toString()} className="remove-button">
+                <button key={value.id} className="remove-button">
                   Remove
                 </button>
               </td>
@@ -33,11 +33,9 @@ function ItemsTable({
                   className="edit-button"
                   onClick={(event) => {
                     showEditItemModalOpen();
-                    console.log(value.id);
-                    //setCurrentItemId(event.currentTarget.key);
-                    //почему так не работает?
-                    setCurrentItemId(value.id);
-                    findAndSetCurrentItemForEditing();
+                    console.log(value);
+
+                    findAndSetCurrentItemForEditing(value);
                   }}
                 >
                   Edit

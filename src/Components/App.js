@@ -150,20 +150,13 @@ function App() {
     );
   }
 
-  function setCurrentItemId(id) {
+  /*  function setCurrentItemId(id) {
     setCurrentItemIdForEditModal(id);
-  }
+  }*/
   //todo
-  function findAndSetCurrentItemForEditing() {
-    setPassItemForEditing(
-      items.map((item) => {
-        console.log(item, currentItemIdForEditModal);
-        if (parseInt(currentItemIdForEditModal) === item.id) {
-          return item;
-        }
-      })
-    );
-    console.log(itemForEditing);
+  function findAndSetCurrentItemForEditing(value) {
+    setCurrentItemIdForEditModal(value.id);
+    setPassItemForEditing(value);
   }
 
   return (
@@ -224,7 +217,7 @@ function App() {
         <ItemsTable
           showEditItemModalOpen={showEditItemModal}
           hideEditItemModal={hideEditItemModal}
-          setCurrentItemId={setCurrentItemId}
+          //setCurrentItemId={setCurrentItemId}
           findAndSetCurrentItemForEditing={findAndSetCurrentItemForEditing}
           itemForEditing={itemForEditing}
           listOfItems={items.filter(
