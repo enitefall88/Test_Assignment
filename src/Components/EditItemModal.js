@@ -126,6 +126,7 @@ function EditItemModal({
             );
             // need to pass an id from list of items as a second argument
             editItem(item, currentItemIdForEditModal);
+            console.log(item, currentItemIdForEditModal);
           }}
         >
           Save
