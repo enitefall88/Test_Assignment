@@ -238,10 +238,9 @@ function App() {
             submitRemoveEntry={submitRemoveItem}
             id={currentItemIdForEditAndDeleteModal}
             //todo item should be passed in
-            message={"Do you want to delete item ?"}
+            message={`Do you want to delete item ${itemForEditingAndDeleting.name}?`}
           />
         )}
-        )
         <ItemsTable
           showEditItemModalOpen={showEditItemModal}
           hideEditItemModal={hideEditItemModal}
