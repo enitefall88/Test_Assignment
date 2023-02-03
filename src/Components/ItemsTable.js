@@ -4,8 +4,6 @@ function ItemsTable({
   listOfItems,
   showEditItemModalOpen,
   setCurrentItemId,
-  items,
-  itemForEditing,
   findAndSetCurrentItemForEditing,
 }) {
   return (
